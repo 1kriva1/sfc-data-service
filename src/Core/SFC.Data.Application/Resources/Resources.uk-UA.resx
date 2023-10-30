@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Acceleration" xml:space="preserve">
+    <value>Прискорення</value>
+  </data>
+  <data name="Aggression" xml:space="preserve">
+    <value>Агресія</value>
+  </data>
+  <data name="Aggressive" xml:space="preserve">
+    <value>Агресивний</value>
+  </data>
+  <data name="Agility" xml:space="preserve">
+    <value>Спритність</value>
+  </data>
+  <data name="Attacking" xml:space="preserve">
+    <value>Атакувальний</value>
+  </data>
+  <data name="AuthorizationError" xml:space="preserve">
+    <value>Користувача не знайдено.</value>
+  </data>
+  <data name="Balance" xml:space="preserve">
+    <value>Баланс</value>
+  </data>
+  <data name="BallControl" xml:space="preserve">
+    <value>Контроль м'яча</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>Обидві</value>
+  </data>
+  <data name="Composure" xml:space="preserve">
+    <value>Холоднокровність</value>
+  </data>
+  <data name="Control" xml:space="preserve">
+    <value>Контроль</value>
+  </data>
+  <data name="CounterAttacks" xml:space="preserve">
+    <value>Контратаки</value>
+  </data>
+  <data name="Crossing" xml:space="preserve">
+    <value>Кроси</value>
+  </data>
+  <data name="Curve" xml:space="preserve">
+    <value>Закручування</value>
+  </data>
+  <data name="DefAwarenence" xml:space="preserve">
+    <value>Захисна обізнаність</value>
+  </data>
+  <data name="Defend" xml:space="preserve">
+    <value>Захисний</value>
+  </data>
+  <data name="Defender" xml:space="preserve">
+    <value>Захисник</value>
+  </data>
+  <data name="Defending" xml:space="preserve">
+    <value>Захист</value>
+  </data>
+  <data name="Dribbling" xml:space="preserve">
+    <value>Дриблінг</value>
+  </data>
+  <data name="FailedResult" xml:space="preserve">
+    <value>Невдалий результат.</value>
+  </data>
+  <data name="Finishing" xml:space="preserve">
+    <value>Завершення</value>
+  </data>
+  <data name="FkAccuracy" xml:space="preserve">
+    <value>Точність штрафних ударів</value>
+  </data>
+  <data name="Forward" xml:space="preserve">
+    <value>Нападаючий</value>
+  </data>
+  <data name="Goalkeeper" xml:space="preserve">
+    <value>Воротар</value>
+  </data>
+  <data name="HeadingAccuracy" xml:space="preserve">
+    <value>Точність грою головою</value>
+  </data>
+  <data name="Interceptions" xml:space="preserve">
+    <value>Перехоплення</value>
+  </data>
+  <data name="Jumping" xml:space="preserve">
+    <value>Стрибки</value>
+  </data>
+  <data name="Left" xml:space="preserve">
+    <value>Ліва</value>
+  </data>
+  <data name="LongPassing" xml:space="preserve">
+    <value>Довгі паси</value>
+  </data>
+  <data name="LongShots" xml:space="preserve">
+    <value>Довгі удари</value>
+  </data>
+  <data name="Mental" xml:space="preserve">
+    <value>Психологічні</value>
+  </data>
+  <data name="Midfielder" xml:space="preserve">
+    <value>Півзахисник</value>
+  </data>
+  <data name="Pace" xml:space="preserve">
+    <value>Темп</value>
+  </data>
+  <data name="Passing" xml:space="preserve">
+    <value>Паси</value>
+  </data>
+  <data name="Penalties" xml:space="preserve">
+    <value>Пенальті</value>
+  </data>
+  <data name="Physical" xml:space="preserve">
+    <value>Фізичні</value>
+  </data>
+  <data name="Physicality" xml:space="preserve">
+    <value>Фізична підготовка</value>
+  </data>
+  <data name="Positioning" xml:space="preserve">
+    <value>Позиціонування</value>
+  </data>
+  <data name="Reactions" xml:space="preserve">
+    <value>Реакція</value>
+  </data>
+  <data name="Right" xml:space="preserve">
+    <value>Права</value>
+  </data>
+  <data name="Shooting" xml:space="preserve">
+    <value>Удари</value>
+  </data>
+  <data name="ShortPassing" xml:space="preserve">
+    <value>Короткі паси</value>
+  </data>
+  <data name="ShotPower" xml:space="preserve">
+    <value>Сила удару</value>
+  </data>
+  <data name="Skill" xml:space="preserve">
+    <value>Майстерність</value>
+  </data>
+  <data name="SlidingTackle" xml:space="preserve">
+    <value>Підкати</value>
+  </data>
+  <data name="SprintSpeed" xml:space="preserve">
+    <value>Швидкість бігу</value>
+  </data>
+  <data name="Stamina" xml:space="preserve">
+    <value>Витривалість</value>
+  </data>
+  <data name="StandingTackle" xml:space="preserve">
+    <value>Боротьба</value>
+  </data>
+  <data name="Strength" xml:space="preserve">
+    <value>Сила</value>
+  </data>
+  <data name="SuccessResult" xml:space="preserve">
+    <value>Успішний результат.</value>
+  </data>
+  <data name="Vision" xml:space="preserve">
+    <value>Бачення</value>
+  </data>
+  <data name="Volleys" xml:space="preserve">
+    <value>Залпи</value>
+  </data>
+</root>

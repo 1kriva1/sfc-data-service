@@ -1,9 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MassTransit" Version="8.1.1" />
+      <PackageReference Include="MassTransit.RabbitMQ" Version="8.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Contracts\SFC.Data.Contracts\SFC.Data.Contracts.csproj" />
+        <ProjectReference Include="..\..\Core\SFC.Data.Application\SFC.Data.Application.csproj" />
+        <ProjectReference Include="..\SFC.Data.Infrastructure.Persistence\SFC.Data.Infrastructure.Persistence.csproj" />
+    </ItemGroup>
 
 </Project>

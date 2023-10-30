@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <PackageId>SFC.Data.Contracts</PackageId>
+        <Version>0.0.2</Version>
+        <Authors>Andrii Kryvoruk</Authors>
+        <Company>SFC</Company>
+        <Product>SFC</Product>
+        <PackageTags>Street Football Club;SFC;contracts</PackageTags>
+        <Description>
+            Contracts from Data service for SFC project
+        </Description>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    </PropertyGroup>
+
+</Project>

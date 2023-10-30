@@ -1,0 +1,1 @@
+﻿global using SFC.Data.Domain.Common;
