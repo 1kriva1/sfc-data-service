@@ -14,8 +14,7 @@ public class LocalizationExtensionsTests
     public void Extension_Localization_ShouldLocalizeDataValue()
     {
         // Arrange
-        string name = "Midfielder";
-        string localizedValue = "Півзахисник";
+        string name = "Midfielder", localizedValue = "Півзахисник";
         Mock<IStringLocalizer<Resources>> _localizerMock = new();
         LocalizedString localizedString = new(name, localizedValue);
         _localizerMock.Setup(_ => _[name]).Returns(localizedString);
