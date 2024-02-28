@@ -1,4 +1,4 @@
-﻿using SFC.Data.Application.Models.Data.Common;
+﻿using SFC.Data.Application.Features.Data.Queries.GetAll.Dto;
 
 namespace SFC.Data.Application.Features.Data.Queries.GetAll;
 

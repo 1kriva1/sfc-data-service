@@ -4,7 +4,7 @@ using MediatR;
 
 using Microsoft.Extensions.Logging;
 
-using SFC.Data.Application.Common.Models;
+using SFC.Data.Application.Models.Base;
 
 namespace SFC.Data.Application.Common.Behaviours;
 

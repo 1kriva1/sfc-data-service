@@ -2,25 +2,25 @@
 
 using SFC.Data.Application.Common.Extensions;
 using SFC.Data.Application.Common.Mappings;
-using SFC.Data.Application.Common.Models;
 using SFC.Data.Application.Features.Data.Queries.GetAll;
-using SFC.Data.Application.Models.Data.Common;
+using SFC.Data.Application.Models.Base;
+using SFC.Data.Application.Models.Data.GetAll.Result;
 
 namespace SFC.Data.Application.Models.Data.GetAll;
 
 public class GetAllResponse : BaseErrorResponse, IMapFrom<GetAllViewModel>
 {
-    public IEnumerable<DataValueDto> FootballPositions { get; init; } = Enumerable.Empty<DataValueDto>();
+    public IEnumerable<DataValueModel> FootballPositions { get; init; } = Enumerable.Empty<DataValueModel>();
 
-    public IEnumerable<DataValueDto> GameStyles { get; init; } = Enumerable.Empty<DataValueDto>();
+    public IEnumerable<DataValueModel> GameStyles { get; init; } = Enumerable.Empty<DataValueModel>();
 
-    public IEnumerable<DataValueDto> StatCategories { get; init; } = Enumerable.Empty<DataValueDto>();
+    public IEnumerable<DataValueModel> StatCategories { get; init; } = Enumerable.Empty<DataValueModel>();
 
-    public IEnumerable<DataValueDto> StatSkills { get; init; } = Enumerable.Empty<DataValueDto>();
+    public IEnumerable<DataValueModel> StatSkills { get; init; } = Enumerable.Empty<DataValueModel>();
 
-    public IEnumerable<StatTypeDataValueDto> StatTypes { get; init; } = Enumerable.Empty<StatTypeDataValueDto>();
+    public IEnumerable<StatTypeDataValueModel> StatTypes { get; init; } = Enumerable.Empty<StatTypeDataValueModel>();
 
-    public IEnumerable<DataValueDto> WorkingFoots { get; init; } = Enumerable.Empty<DataValueDto>();
+    public IEnumerable<DataValueModel> WorkingFoots { get; init; } = Enumerable.Empty<DataValueModel>();
 
     public void Mapping(Profile profile) => profile.CreateMap<GetAllViewModel, GetAllResponse>()
                                                    .IgnoreAllNonExisting();

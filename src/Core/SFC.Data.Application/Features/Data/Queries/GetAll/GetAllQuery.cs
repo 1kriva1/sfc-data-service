@@ -1,5 +1,5 @@
 ﻿using SFC.Data.Application.Common.Enums;
-using SFC.Data.Application.Common.Models;
+using SFC.Data.Application.Models.Base;
 
 namespace SFC.Data.Application.Features.Data.Queries.GetAll;
 

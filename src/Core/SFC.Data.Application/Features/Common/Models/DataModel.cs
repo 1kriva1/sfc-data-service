@@ -1,6 +1,6 @@
 ﻿using SFC.Data.Domain.Entities;
 
-namespace SFC.Data.Application.Models.Data.Data;
+namespace SFC.Data.Application.Features.Common.Models;
 public record DataModel
 {
     public IEnumerable<FootballPosition> FootballPositions { get; init; } = Enumerable.Empty<FootballPosition>();

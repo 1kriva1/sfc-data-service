@@ -3,7 +3,7 @@ using System.Text.Json;
 
 using SFC.Data.Application.Common.Constants;
 using SFC.Data.Application.Common.Exceptions;
-using SFC.Data.Application.Common.Models;
+using SFC.Data.Application.Models.Base;
 
 using ExceptionType = System.Exception;
 

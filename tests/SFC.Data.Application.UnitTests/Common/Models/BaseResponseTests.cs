@@ -3,7 +3,7 @@
 using Newtonsoft.Json.Linq;
 
 using SFC.Data.Application.Common.Constants;
-using SFC.Data.Application.Common.Models;
+using SFC.Data.Application.Models.Base;
 
 namespace SFC.Data.Application.UnitTests.Common.Models;
 public class BaseResponseTests
