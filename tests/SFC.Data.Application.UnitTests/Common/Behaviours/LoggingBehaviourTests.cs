@@ -6,9 +6,9 @@ using Moq;
 
 using SFC.Data.Application.Common.Behaviours;
 using SFC.Data.Application.Common.Enums;
-using SFC.Data.Application.Common.Models;
 using SFC.Data.Application.Features.Data.Queries.GetAll;
 using SFC.Data.Application.Interfaces.Identity;
+using SFC.Data.Application.Models.Base;
 
 namespace SFC.Data.Application.UnitTests.Common.Behaviours;
 public class LoggingBehaviourTests

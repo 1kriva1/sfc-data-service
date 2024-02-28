@@ -1,8 +1,10 @@
 ﻿using MediatR;
+
 using Microsoft.Extensions.Logging;
 
-using SFC.Data.Application.Common.Models;
 using SFC.Data.Application.Interfaces.Identity;
+using SFC.Data.Application.Models.Base;
+
 using System.Text.Json;
 
 namespace SFC.Data.Application.Common.Behaviours;

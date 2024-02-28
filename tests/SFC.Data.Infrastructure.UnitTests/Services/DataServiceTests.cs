@@ -4,8 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 using Moq;
 
+using SFC.Data.Application.Features.Common.Models;
 using SFC.Data.Application.Interfaces.Persistence;
-using SFC.Data.Application.Models.Data.Data;
 using SFC.Data.Contracts.Events;
 using SFC.Data.Domain.Common;
 using SFC.Data.Domain.Entities;

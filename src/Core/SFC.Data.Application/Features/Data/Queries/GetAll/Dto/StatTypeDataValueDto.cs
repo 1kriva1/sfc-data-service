@@ -4,7 +4,7 @@ using SFC.Data.Application.Common.Extensions;
 using SFC.Data.Application.Common.Mappings;
 using SFC.Data.Domain.Entities;
 
-namespace SFC.Data.Application.Models.Data.Common;
+namespace SFC.Data.Application.Features.Data.Queries.GetAll.Dto;
 public class StatTypeDataValueDto : DataValueDto, IMapFrom<StatType>
 {
     public int Category { get; set; }

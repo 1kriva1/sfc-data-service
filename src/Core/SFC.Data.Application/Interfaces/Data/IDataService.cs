@@ -1,4 +1,4 @@
-﻿using SFC.Data.Application.Models.Data.Data;
+﻿using SFC.Data.Application.Features.Common.Models;
 
 namespace SFC.Data.Application.Interfaces.Initialization;
 public interface IDataService

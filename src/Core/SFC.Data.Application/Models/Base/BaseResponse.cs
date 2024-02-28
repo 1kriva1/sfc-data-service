@@ -1,7 +1,8 @@
 ﻿using System.Text.Json.Serialization;
+
 using SFC.Data.Application.Common.Constants;
 
-namespace SFC.Data.Application.Common.Models;
+namespace SFC.Data.Application.Models.Base;
 
 [JsonDerivedType(typeof(BaseErrorResponse))]
 public class BaseResponse

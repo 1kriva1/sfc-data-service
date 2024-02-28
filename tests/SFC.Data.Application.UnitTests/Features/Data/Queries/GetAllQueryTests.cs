@@ -6,10 +6,10 @@ using Moq;
 
 using SFC.Data.Application.Common.Enums;
 using SFC.Data.Application.Common.Mappings;
+using SFC.Data.Application.Features.Common.Models;
 using SFC.Data.Application.Features.Data.Queries.GetAll;
+using SFC.Data.Application.Features.Data.Queries.GetAll.Dto;
 using SFC.Data.Application.Interfaces.Initialization;
-using SFC.Data.Application.Models.Data.Common;
-using SFC.Data.Application.Models.Data.Data;
 using SFC.Data.Domain.Entities;
 
 namespace SFC.Data.Application.UnitTests.Features.Data.Queries;

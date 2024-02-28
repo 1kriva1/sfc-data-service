@@ -4,7 +4,7 @@ using Moq;
 
 using SFC.Data.Application.Common.Constants;
 using SFC.Data.Application.Common.Extensions;
-using SFC.Data.Application.Models.Data.Common;
+using SFC.Data.Application.Features.Data.Queries.GetAll.Dto;
 
 namespace SFC.Data.Application.UnitTests.Common.Extensions;
 public class LocalizationExtensionsTests

@@ -10,9 +10,9 @@ using Moq;
 using SFC.Data.Api.Controllers;
 using SFC.Data.Application.Common.Constants;
 using SFC.Data.Application.Common.Mappings;
-using SFC.Data.Application.Common.Models;
 using SFC.Data.Application.Features.Data.Queries.GetAll;
 using SFC.Data.Application.Interfaces.Identity;
+using SFC.Data.Application.Models.Base;
 using SFC.Data.Application.Models.Data.GetAll;
 
 namespace SFC.Data.Api.UnitTests.Controllers;

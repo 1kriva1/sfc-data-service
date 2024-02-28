@@ -2,10 +2,10 @@
 
 using SFC.Data.Application.Interfaces.Initialization;
 using SFC.Data.Application.Interfaces.Persistence;
-using SFC.Data.Application.Models.Data.Data;
 using SFC.Data.Domain.Entities;
 using SFC.Data.Contracts.Events;
 using SFC.Data.Infrastructure.Extensions;
+using SFC.Data.Application.Features.Common.Models;
 
 namespace SFC.Data.Infrastructure.Services;
 public class DataService : IDataService

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace SFC.Data.Application.Common.Models;
+namespace SFC.Data.Application.Models.Base;
 
 public class BaseErrorResponse : BaseResponse
 {

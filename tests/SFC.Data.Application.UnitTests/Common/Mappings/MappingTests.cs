@@ -5,7 +5,7 @@ using AutoMapper.Internal;
 
 using SFC.Data.Application.Common.Mappings;
 using SFC.Data.Application.Features.Data.Queries.GetAll;
-using SFC.Data.Application.Models.Data.Common;
+using SFC.Data.Application.Features.Data.Queries.GetAll.Dto;
 using SFC.Data.Application.Models.Data.GetAll;
 using SFC.Data.Domain.Common;
 using SFC.Data.Domain.Entities;

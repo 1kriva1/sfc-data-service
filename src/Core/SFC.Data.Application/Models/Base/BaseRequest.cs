@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 using SFC.Data.Application.Common.Enums;
 
-namespace SFC.Data.Application.Common.Models;
+namespace SFC.Data.Application.Models.Base;
 
 public abstract class BaseRequest
 {
