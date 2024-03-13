@@ -15,7 +15,7 @@ public class HangfireExtensionsTests
         // Arrange
         Dictionary<string, string> initialData = new()
         {
-            {"ConnectionStrings:Hangfire", "Server=(localdb)\\MSSQLLocalDB;Database=Hangfire;Trusted_Connection=True;"},
+            {"ConnectionStrings:Hangfire", "Server=.\\sqlexpress;Database=Hangfire;Trusted_Connection=True;"},
             {"Hangfire:SchemaNamePrefix", "Data"},
             {"Hangfire:Retry:Attempts", "5"},
             {"Hangfire:Retry:DelaysInSeconds:0", "15"},
