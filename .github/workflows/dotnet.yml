@@ -28,8 +28,7 @@ jobs:
                -Destination SqlLocalDB.msi
             Start-Process `
                -FilePath "SqlLocalDB.msi" `
-               -ArgumentList "/qn", "/norestart", "/l*v SqlLocalDBInstall.log", "IACCEPTSQLLOCALDBLICENSETERMS=YES"; `
-               -Wait
+               -ArgumentList "/qn", "/norestart", "/l*v SqlLocalDBInstall.log", "IACCEPTSQLLOCALDBLICENSETERMS=YES";
             sqlcmd -l 60 -S "(LocalDb)\MSSQLLocalDB" -Q "SELECT @@VERSION;"
     - name: Restore dependencies
       run: dotnet restore
