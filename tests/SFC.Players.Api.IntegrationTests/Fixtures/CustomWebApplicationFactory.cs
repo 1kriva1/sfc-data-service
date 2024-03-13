@@ -1,6 +1,8 @@
 ﻿using System.Data.Common;
 
 using MassTransit;
+using Hangfire;
+using Hangfire.MemoryStorage;
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -45,10 +47,9 @@ public class CustomWebApplicationFactory<TStartup>
                 options.UseSqlite(connection);
             });
 
-            services.AddMassTransitTestHarness(configure =>
-            {
-                configure.AddConsumer<DataRequireEventConsumer>();
-            });
+            services.AddMassTransitTestHarness(configure => configure.AddConsumer<DataRequireEventConsumer>());
+
+            services.AddHangfire(x => x.UseMemoryStorage());
         });
 
         builder.UseEnvironment(TEST_ENVIROMENT);
