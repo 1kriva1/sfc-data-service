@@ -24,7 +24,9 @@ public static class MassTransitExtensions
                     .GetSection(RabbitMqSettings.SECTION_KEY)
                     .Get<RabbitMqSettings>()!;
 
-                rabbitMqConfigure.Host(settings.Host, settings.Port, "/", settings.Name, h =>
+                string rabbitMqConnectionString = configuration.GetConnectionString("RabbitMq")!;
+
+                rabbitMqConfigure.Host(new Uri(rabbitMqConnectionString), settings.Name, h =>
                 {
                     h.Username(settings.Username);
                     h.Password(settings.Password);

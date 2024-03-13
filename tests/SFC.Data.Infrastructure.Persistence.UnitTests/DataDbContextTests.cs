@@ -15,12 +15,12 @@ using static MassTransit.ValidationResultExtensions;
 namespace SFC.Data.Infrastructure.Persistence.UnitTests;
 public class DataDbContextTests
 {
-    private readonly Mock<IDateTimeService> dateTimeServiceMock = new();
-    private readonly DbContextOptions<DataDbContext> dbContextOptions;
+    private readonly Mock<IDateTimeService> _dateTimeServiceMock = new();
+    private readonly DbContextOptions<DataDbContext> _dbContextOptions;
 
     public DataDbContextTests()
     {
-        dbContextOptions = new DbContextOptionsBuilder<DataDbContext>()
+        _dbContextOptions = new DbContextOptionsBuilder<DataDbContext>()
             .UseInMemoryDatabase($"DataDbContextTestsDb_{DateTime.Now.ToFileTimeUtc()}")
             .Options;
     }
@@ -166,8 +166,8 @@ public class DataDbContextTests
     private DataDbContext CreateDbContext()
     {
         Mock<IMediator> mediatorMock = new();
-        DataEntitySaveChangesInterceptor interceptor = new(dateTimeServiceMock.Object);
+        DataEntitySaveChangesInterceptor interceptor = new(_dateTimeServiceMock.Object);
 
-        return new(dbContextOptions, mediatorMock.Object, dateTimeServiceMock.Object, interceptor);
+        return new(_dbContextOptions, mediatorMock.Object, _dateTimeServiceMock.Object, interceptor);
     }
 }

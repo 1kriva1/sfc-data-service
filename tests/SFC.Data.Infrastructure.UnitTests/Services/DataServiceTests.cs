@@ -82,17 +82,17 @@ public class DataServiceTests
     private DataService CreateService(Mock<IPublishEndpoint> publishMock)
     {
         Mock<IRepository<FootballPosition>> positionsRepositoryMock = SetupRepository(
-            new FootballPosition[1] { new FootballPosition { Id = 0, Title = "Title" } });
+            new FootballPosition[1] { new() { Id = 0, Title = "Title" } });
         Mock<IRepository<GameStyle>> gameStyleRepositoryMock = SetupRepository(
-            new GameStyle[1] { new GameStyle { Id = 0, Title = "Title" } });
+            new GameStyle[1] { new() { Id = 0, Title = "Title" } });
         Mock<IRepository<StatCategory>> statCategoryRepositoryMock = SetupRepository(
-            new StatCategory[1] { new StatCategory { Id = 0, Title = "Title" } });
+            new StatCategory[1] { new() { Id = 0, Title = "Title" } });
         Mock<IRepository<StatSkill>> statSkillRepositoryMock = SetupRepository(
-            new StatSkill[1] { new StatSkill { Id = 0, Title = "Title" } });
+            new StatSkill[1] { new() { Id = 0, Title = "Title" } });
         Mock<IRepository<StatType>> statTypeRepositoryMock = SetupRepository(
-            new StatType[1] { new StatType { Id = 0, Title = "Title", CategoryId = 0, SkillId = 0 } });
+            new StatType[1] { new() { Id = 0, Title = "Title", CategoryId = 0, SkillId = 0 } });
         Mock<IRepository<WorkingFoot>> workingFootRepositoryMock = SetupRepository(
-            new WorkingFoot[1] { new WorkingFoot { Id = 0, Title = "Title" } });
+            new WorkingFoot[1] { new() { Id = 0, Title = "Title" } });
 
         return new(publishMock.Object,
             positionsRepositoryMock.Object,

@@ -16,11 +16,11 @@ namespace SFC.Data.Infrastructure.UnitTests.Services.Hosted;
 public class DatabaseResetHostedServiceTests
 {
     private readonly Mock<ILogger<DatabaseResetHostedService>> _loggerMock = new();
-    private readonly DbContextOptions<DataDbContext> dbContextOptions;
+    private readonly DbContextOptions<DataDbContext> _dbContextOptions;
 
     public DatabaseResetHostedServiceTests()
     {
-        dbContextOptions = new DbContextOptionsBuilder<DataDbContext>()
+        _dbContextOptions = new DbContextOptionsBuilder<DataDbContext>()
            .UseInMemoryDatabase($"DatabaseResetHostedServiceTestsDb_{DateTime.Now.ToFileTimeUtc()}")
            .Options;
     }
@@ -51,6 +51,6 @@ public class DatabaseResetHostedServiceTests
         Mock<IDateTimeService> dateTimeServiceMock = new();
         DataEntitySaveChangesInterceptor interceptor = new(dateTimeServiceMock.Object);
 
-        return new(dbContextOptions, mediatorMock.Object, dateTimeServiceMock.Object, interceptor);
+        return new(_dbContextOptions, mediatorMock.Object, dateTimeServiceMock.Object, interceptor);
     }
 }

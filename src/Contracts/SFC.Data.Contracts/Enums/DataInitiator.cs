@@ -2,5 +2,5 @@
 public enum DataInitiator
 {
     Init,
-    Players
+    Player
 }

@@ -7,6 +7,7 @@ using SFC.Data.Application.Models.Data.GetAll;
 namespace SFC.Data.Api.Controllers;
 
 [Authorize]
+[ResponseCache(Location = ResponseCacheLocation.Any, Duration = 10000)]
 public class DataController : ApiControllerBase
 {
     [HttpGet]

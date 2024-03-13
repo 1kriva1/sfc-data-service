@@ -18,8 +18,7 @@ public class MassTransitExtensionsTests
         // Arrange
         Dictionary<string, string> initialData = new()
         {
-            {"RabbitMq:Host", "localhost"},
-            {"RabbitMq:Port", "5672"},
+            {"ConnectionStrings:RabbitMq", "rabbitmq://127.0.0.1:5672"},
             {"RabbitMq:Username", "guest"},
             {"RabbitMq:Password", "guest"},
             {"RabbitMq:Name", "SFC.Players"},
@@ -45,7 +44,7 @@ public class MassTransitExtensionsTests
 
         // Assert
         Assert.Equal("RabbitMQ", configurationObject.Results.bus.host.type.ToString());
-        Assert.Equal("localhost", configurationObject.Results.bus.host.host.ToString());
+        Assert.Equal("127.0.0.1", configurationObject.Results.bus.host.host.ToString());
         Assert.Equal("5672", configurationObject.Results.bus.host.port.ToString());
         Assert.Equal("/", configurationObject.Results.bus.host.virtualHost.ToString());
         Assert.Equal("guest", configurationObject.Results.bus.host.username.ToString());

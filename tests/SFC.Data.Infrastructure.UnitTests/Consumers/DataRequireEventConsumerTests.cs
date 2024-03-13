@@ -43,7 +43,7 @@ public class DataRequireEventConsumerTests
     public async Task Consumer_DataRequireEvent_ShouldInitDataOnlyForSpecificRoutingKey()
     {
         // Arrange
-        DataRequireEvent @event = new() { Initiator = DataInitiator.Players };
+        DataRequireEvent @event = new() { Initiator = DataInitiator.Player };
         IServiceCollection services = new ServiceCollection();
         Mock<IDataService> dataServiceMock = new();
         dataServiceMock.Setup(m => m.InitAsync("data.init")).Verifiable();
@@ -60,7 +60,7 @@ public class DataRequireEventConsumerTests
 
         // Assert
         Assert.True((await harness.Consumed.Any<DataRequireEvent>()));
-        dataServiceMock.Verify(m => m.InitAsync("data.players"), Times.Once);
+        dataServiceMock.Verify(m => m.InitAsync("data.player"), Times.Once);
         dataServiceMock.Verify(m => m.InitAsync("data.init"), Times.Never);
     }
 }
