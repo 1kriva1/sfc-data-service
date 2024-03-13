@@ -20,6 +20,17 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
+    - name: Install MSSQLLocalDB
+      run: |
+            Import-Module BitsTransfer
+            Start-BitsTransfer `
+               -Source https://download.microsoft.com/download/3/8/d/38de7036-2433-4207-8eae-06e247e17b25/SqlLocalDB.msi `
+               -Destination SqlLocalDB.msi
+            Start-Process `
+               -FilePath "SqlLocalDB.msi" `
+               -ArgumentList "/qn", "/norestart", "/l*v SqlLocalDBInstall.log", "IACCEPTSQLLOCALDBLICENSETERMS=YES"; `
+               -Wait
+            sqlcmd -l 60 -S "(LocalDb)\MSSQLLocalDB" -Q "SELECT @@VERSION;"
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
