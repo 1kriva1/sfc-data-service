@@ -4,29 +4,31 @@ using Microsoft.EntityFrameworkCore;
 
 using Moq;
 
+using SFC.Data.Application.Interfaces.Cache;
 using SFC.Data.Application.Interfaces.Common;
 using SFC.Data.Domain.Entities;
 using SFC.Data.Infrastructure.Persistence.Interceptors;
 using SFC.Data.Infrastructure.Persistence.Repositories;
 
 namespace SFC.Data.Infrastructure.Persistence.UnitTests.Repositories;
-public class RepositoryTests
+public class CacheRepositoryTests
 {
     private readonly DbContextOptions<DataDbContext> _dbContextOptions;
+    private readonly Mock<ICache> _cacheMock = new();
 
-    public RepositoryTests()
+    public CacheRepositoryTests()
     {
         _dbContextOptions = new DbContextOptionsBuilder<DataDbContext>()
-            .UseInMemoryDatabase($"RepositoryTestsDb_{DateTime.Now.ToFileTimeUtc()}")
+            .UseInMemoryDatabase($"CacheRepositoryTestsDb_{DateTime.Now.ToFileTimeUtc()}")
             .Options;
     }
 
     [Fact]
     [Trait("Persistence", "Repository")]
-    public async Task Persistence_Repository_ShouldAddEntity()
+    public async Task Persistence_CacheRepository_ShouldAddEntity()
     {
         // Arrange
-        Repository<FootballPosition> repository = CreateRepository();
+        CacheRepository<FootballPosition> repository = CreateRepository();
         FootballPosition entity = new() { Id = 1, Title = "Defender" };
 
         // Act
@@ -40,10 +42,10 @@ public class RepositoryTests
 
     [Fact]
     [Trait("Persistence", "Repository")]
-    public async Task Persistence_Repository_ShouldUpdateEntity()
+    public async Task Persistence_CacheRepository_ShouldUpdateEntity()
     {
         // Arrange
-        Repository<FootballPosition> repository = CreateRepository();
+        CacheRepository<FootballPosition> repository = CreateRepository();
         FootballPosition entity = new() { Id = 1, Title = "Defender" };
 
         // Act
@@ -62,10 +64,10 @@ public class RepositoryTests
 
     [Fact]
     [Trait("Persistence", "Repository")]
-    public async Task Persistence_Repository_ShouldDeleteEntity()
+    public async Task Persistence_CacheRepository_ShouldDeleteEntity()
     {
         // Arrange
-        Repository<FootballPosition> repository = CreateRepository();
+        CacheRepository<FootballPosition> repository = CreateRepository();
         FootballPosition entity = new() { Id = 1, Title = "Defender" };
 
         // Act
@@ -80,10 +82,10 @@ public class RepositoryTests
 
     [Fact]
     [Trait("Persistence", "Repository")]
-    public async Task Persistence_Repository_ShouldGetByIdEntity()
+    public async Task Persistence_CacheRepository_ShouldGetByIdEntity()
     {
         // Arrange
-        Repository<FootballPosition> repository = CreateRepository();
+        CacheRepository<FootballPosition> repository = CreateRepository();
         FootballPosition entity = new() { Id = 1, Title = "Defender" };
 
         // Act
@@ -98,10 +100,10 @@ public class RepositoryTests
 
     [Fact]
     [Trait("Persistence", "Repository")]
-    public async Task Persistence_Repository_ShouldNotFoundEntity()
+    public async Task Persistence_CacheRepository_ShouldNotFoundEntity()
     {
         // Arrange
-        Repository<FootballPosition> repository = CreateRepository();
+        CacheRepository<FootballPosition> repository = CreateRepository();
 
         // Act
         FootballPosition? result = await repository.GetByIdAsync(1);
@@ -112,12 +114,13 @@ public class RepositoryTests
 
     [Fact]
     [Trait("Persistence", "Repository")]
-    public async Task Persistence_Repository_ShouldListAllEntities()
+    public async Task Persistence_CacheRepository_ShouldListAllEntitiesFromDatabase()
     {
         // Arrange
-        Repository<FootballPosition> repository = CreateRepository();
+        CacheRepository<FootballPosition> repository = CreateRepository();
         FootballPosition entityFirst = new() { Id = 1, Title = "Defender" };
         FootballPosition entitySecond = new() { Id = 2, Title = "Midfilder" };
+        string cacheKey = $"{typeof(FootballPosition).Name}";
 
         // Act
         await repository.AddAsync(entityFirst);
@@ -129,14 +132,43 @@ public class RepositoryTests
         Assert.Equal(2, result.Count);
         Assert.Equal(entityFirst.Id, result[0].Id);
         Assert.Equal(entitySecond.Id, result[1].Id);
+        _cacheMock.Verify(c => c.SetAsync(cacheKey, It.IsAny<IReadOnlyList<FootballPosition>?>(), null, It.IsAny<CancellationToken>()), Times.Once);
     }
 
     [Fact]
     [Trait("Persistence", "Repository")]
-    public async Task Persistence_Repository_ShouldNotFoundEntities()
+    public async Task Persistence_CacheRepository_ShouldListAllEntitiesFromCache()
     {
         // Arrange
-        Repository<FootballPosition> repository = CreateRepository();
+        CacheRepository<FootballPosition> repository = CreateRepository();
+        FootballPosition entityFirst = new() { Id = 1, Title = "Defender" };
+        FootballPosition entitySecond = new() { Id = 2, Title = "Midfilder" };
+        string cacheKey = $"{typeof(FootballPosition).Name}";
+        IReadOnlyList<FootballPosition>? list = new List<FootballPosition>
+        {
+            entityFirst,
+            entitySecond
+        };
+        _cacheMock.Setup(c=>c.TryGet(cacheKey, out list)).Returns(true);
+
+        // Act
+        IReadOnlyList<FootballPosition>? result = await repository.ListAllAsync();
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(2, result.Count);
+        Assert.Equal(entityFirst.Id, result[0].Id);
+        Assert.Equal(entitySecond.Id, result[1].Id);
+        _cacheMock.Verify(c => c.SetAsync(cacheKey, It.IsAny<IReadOnlyList<FootballPosition>?>(), null, It.IsAny<CancellationToken>()), Times.Never);
+    }
+
+    [Fact]
+    [Trait("Persistence", "Repository")]
+    public async Task Persistence_CacheRepository_ShouldNotFoundEntitiesInDatabaseAndCache()
+    {
+        // Arrange
+        string cacheKey = $"{typeof(FootballPosition).Name}";
+        CacheRepository<FootballPosition> repository = CreateRepository();
 
         // Act
         IReadOnlyList<FootballPosition>? result = await repository.ListAllAsync();
@@ -144,9 +176,10 @@ public class RepositoryTests
         // Assert
         Assert.NotNull(result);
         Assert.Empty(result);
+        _cacheMock.Verify(c => c.SetAsync(cacheKey, It.IsAny<IReadOnlyList<FootballPosition>?>(), null, It.IsAny<CancellationToken>()), Times.Once);
     }
 
-    private Repository<FootballPosition> CreateRepository()
+    private CacheRepository<FootballPosition> CreateRepository()
     {
         Mock<IMediator> mediatorMock = new();
 
@@ -156,6 +189,6 @@ public class RepositoryTests
 
         DataDbContext context = new(_dbContextOptions, mediatorMock.Object, dateTimeServiceMock.Object, interceptorMock.Object);
 
-        return new Repository<FootballPosition>(context);
+        return new CacheRepository<FootballPosition>(new Repository<FootballPosition>(context), _cacheMock.Object);
     }
 }

@@ -14,11 +14,11 @@ namespace SFC.Data.Infrastructure.Persistence.UnitTests.Extensions;
 public class EntityExtensionsTests
 {
     private readonly Mock<IDateTimeService> _dateTimeServiceMock = new();
-    private readonly DbContextOptions<DataDbContext> dbContextOptions;
+    private readonly DbContextOptions<DataDbContext> _dbContextOptions;
 
     public EntityExtensionsTests()
     {
-        dbContextOptions = new DbContextOptionsBuilder<DataDbContext>()
+        _dbContextOptions = new DbContextOptionsBuilder<DataDbContext>()
             .UseInMemoryDatabase($"EntityExtensionsTestsDb_{DateTime.Now.ToFileTimeUtc()}")
             .Options;
     }
@@ -50,6 +50,6 @@ public class EntityExtensionsTests
         Mock<IMediator> mediatorMock = new();
         DataEntitySaveChangesInterceptor interceptor = new(_dateTimeServiceMock.Object);
 
-        return new(dbContextOptions, mediatorMock.Object, _dateTimeServiceMock.Object, interceptor);
+        return new(_dbContextOptions, mediatorMock.Object, _dateTimeServiceMock.Object, interceptor);
     }
 }

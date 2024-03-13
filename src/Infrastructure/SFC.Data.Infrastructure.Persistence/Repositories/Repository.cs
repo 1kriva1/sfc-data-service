@@ -18,7 +18,7 @@ public class Repository<T> : IRepository<T> where T : class
         return t;
     }
 
-    public async Task<IReadOnlyList<T>> ListAllAsync()
+    public virtual async Task<IReadOnlyList<T>> ListAllAsync()
     {
         return await _dbContext.Set<T>().ToListAsync();
     }

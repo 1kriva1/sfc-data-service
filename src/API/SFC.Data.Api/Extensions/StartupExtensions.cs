@@ -51,6 +51,8 @@ public static class StartupExtensions
 
         app.UseCustomExceptionHandler();
 
+        app.UseHangfireDashboard();
+
         app.MapControllers();
 
         return app;

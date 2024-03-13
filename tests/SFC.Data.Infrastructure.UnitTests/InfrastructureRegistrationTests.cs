@@ -7,6 +7,7 @@ using SFC.Data.Application.Interfaces.Initialization;
 using SFC.Data.Infrastructure.Services.Hosted;
 using SFC.Data.Infrastructure.Persistence;
 using SFC.Data.Application;
+using SFC.Data.Application.Interfaces.Cache;
 
 namespace SFC.Data.Infrastructure.UnitTests;
 public class InfrastructureRegistrationTests
@@ -20,6 +21,10 @@ public class InfrastructureRegistrationTests
         // Arrange
         Dictionary<string, string> initialData = new()
         {
+            {"ConnectionStrings:RabbitMq", "rabbitmq://127.0.0.1:5672"},
+            {"Cache:Enabled", "true"},
+            {"Cache:AbsoluteExpirationInMinutes", "15"},
+            {"Cache:SlidingExpirationInMinutes", "45"},
             {"RabbitMq:Host", "localhost"},
             {"RabbitMq:Port", "5672"},
             {"RabbitMq:Username", "guest"},
@@ -38,8 +43,11 @@ public class InfrastructureRegistrationTests
         // Assert
         Assert.NotNull(application.Services.GetService<IDateTimeService>());
         Assert.NotNull(application.Services.GetService<IDataService>());
+        Assert.NotNull(application.Services.GetService<ICache>());
+        Assert.NotNull(application.Services.GetService<IRefreshCache>());
         Assert.Null(_builder.Services.FirstOrDefault(s => s.ImplementationType == typeof(DataInitializationHostedService)));
         Assert.NotNull(_builder.Services.FirstOrDefault(s => s.ImplementationType == typeof(DatabaseResetHostedService)));
+        Assert.NotNull(_builder.Services.FirstOrDefault(s => s.ImplementationType == typeof(JobsInitializationHostedService)));
     }
 
     [Fact]

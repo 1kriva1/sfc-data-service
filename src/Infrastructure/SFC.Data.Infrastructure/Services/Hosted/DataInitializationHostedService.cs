@@ -12,7 +12,9 @@ public class DataInitializationHostedService : IHostedService
     private readonly ILogger<DataInitializationHostedService> _logger;
     private readonly IServiceProvider _services;
 
-    public DataInitializationHostedService(ILogger<DataInitializationHostedService> logger, IServiceProvider services)
+    public DataInitializationHostedService(
+        ILogger<DataInitializationHostedService> logger,
+        IServiceProvider services)
     {
         _logger = logger;
         _services = services;
@@ -28,7 +30,7 @@ public class DataInitializationHostedService : IHostedService
 
         string routingKey = DataInitiator.Init.BuildDataExchangeRoutingKey();
 
-        await service.InitAsync(routingKey);
+        await service.InitAsync(routingKey);        
     }
 
     public Task StopAsync(CancellationToken cancellationToken)
