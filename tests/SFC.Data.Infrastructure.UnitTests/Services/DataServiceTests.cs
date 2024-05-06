@@ -6,7 +6,8 @@ using Moq;
 
 using SFC.Data.Application.Features.Common.Models;
 using SFC.Data.Application.Interfaces.Persistence;
-using SFC.Data.Contracts.Events;
+using SFC.Data.Messages.Enums;
+using SFC.Data.Messages.Messages;
 using SFC.Data.Domain.Common;
 using SFC.Data.Domain.Entities;
 using SFC.Data.Infrastructure.Services;
@@ -20,15 +21,15 @@ public class DataServiceTests
     {
         // Arrange
         Mock<IPublishEndpoint> publishMock = new();
-        publishMock.Setup(p => p.Publish(It.IsAny<DataInitializationEvent>(), It.IsAny<CancellationToken>()))
+        publishMock.Setup(p => p.Publish(It.IsAny<DataInitializationMessage>(), It.IsAny<CancellationToken>()))
             .Verifiable();
 
         // Act
         DataService service = CreateService(publishMock);
-        await service.InitAsync("KEY");
+        await service.InitAsync(DataInitiator.Init);
 
         // Assert
-        publishMock.Verify(m => m.Publish(It.IsAny<DataInitializationEvent>(), It.IsAny<CancellationToken>()), Times.Once);
+        publishMock.Verify(m => m.Publish(It.IsAny<DataInitializationMessage>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 
     [Fact]
@@ -37,17 +38,16 @@ public class DataServiceTests
     {
         // Arrange
         Mock<IPublishEndpoint> publishMock = new();
-        DataInitializationEvent @event = null!;
-        string routingKey = "PLAYERS";
-        publishMock.Setup(p => p.Publish(It.IsAny<DataInitializationEvent>(), It.IsAny<CancellationToken>()))
-            .Callback<DataInitializationEvent, CancellationToken>((assertEvent, _) => @event = assertEvent);
+        DataInitializationMessage @event = null!;
+        publishMock.Setup(p => p.Publish(It.IsAny<DataInitializationMessage>(), It.IsAny<CancellationToken>()))
+            .Callback<DataInitializationMessage, CancellationToken>((assertEvent, _) => @event = assertEvent);
 
         // Act
         DataService service = CreateService(publishMock);
-        await service.InitAsync(routingKey);
+        await service.InitAsync(DataInitiator.Player);
 
         // Assert
-        Assert.Equal(routingKey, @event.Initiator);
+        Assert.Equal(DataInitiator.Player, @event.Initiator);
         Assert.Single(@event.GameStyles);
         Assert.Single(@event.WorkingFoots);
         Assert.Single(@event.StatCategories);
@@ -63,7 +63,7 @@ public class DataServiceTests
         // Arrange
         IServiceCollection services = new ServiceCollection();
         Mock<IPublishEndpoint> publishMock = new();
-        publishMock.Setup(p => p.Publish(It.IsAny<DataInitializationEvent>(), It.IsAny<CancellationToken>()))
+        publishMock.Setup(p => p.Publish(It.IsAny<DataInitializationMessage>(), It.IsAny<CancellationToken>()))
             .Verifiable();
 
         // Act

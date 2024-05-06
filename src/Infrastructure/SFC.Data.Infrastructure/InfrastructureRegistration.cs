@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SFC.Data.Application.Interfaces.Common;
 using SFC.Data.Infrastructure.Services;
 using SFC.Data.Infrastructure.Extensions;
-using SFC.Data.Application.Interfaces.Initialization;
+using SFC.Data.Application.Interfaces.Data;
 using SFC.Data.Infrastructure.Services.Hosted;
 using Microsoft.AspNetCore.Builder;
 using Hangfire;
@@ -32,7 +32,7 @@ public static class InfrastructureRegistration
 
         builder.Services.AddHostedService<JobsInitializationHostedService>();
 
-        if (builder.Configuration.IsInitData())
+        if (builder.Configuration.StartDataInitialization())
         {
             builder.Services.AddHostedService<DataInitializationHostedService>();
         }

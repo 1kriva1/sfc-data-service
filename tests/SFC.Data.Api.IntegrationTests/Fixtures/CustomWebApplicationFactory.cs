@@ -47,7 +47,7 @@ public class CustomWebApplicationFactory<TStartup>
                 options.UseSqlite(connection);
             });
 
-            services.AddMassTransitTestHarness(configure => configure.AddConsumer<DataRequireEventConsumer>());
+            services.AddMassTransitTestHarness(configure => configure.AddConsumer<DataRequireMessageConsumer>());
 
             services.AddHangfire(x => x.UseMemoryStorage());
         });

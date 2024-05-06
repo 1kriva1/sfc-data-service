@@ -5,7 +5,7 @@ using MediatR;
 using SFC.Data.Application.Common.Extensions;
 using SFC.Data.Application.Features.Common.Models;
 using SFC.Data.Application.Features.Data.Queries.GetAll.Dto;
-using SFC.Data.Application.Interfaces.Initialization;
+using SFC.Data.Application.Interfaces.Data;
 
 namespace SFC.Data.Application.Features.Data.Queries.GetAll;
 

@@ -6,6 +6,8 @@ using SFC.Data.Application.Common.Constants;
 using SFC.Data.Application.Common.Extensions;
 using SFC.Data.Application.Features.Data.Queries.GetAll.Dto;
 
+using Localization = SFC.Data.Application.Common.Constants.Messages;
+
 namespace SFC.Data.Application.UnitTests.Common.Extensions;
 public class LocalizationExtensionsTests
 {
@@ -18,7 +20,7 @@ public class LocalizationExtensionsTests
         Mock<IStringLocalizer<Resources>> _localizerMock = new();
         LocalizedString localizedString = new(name, localizedValue);
         _localizerMock.Setup(_ => _[name]).Returns(localizedString);
-        Messages.Configure(_localizerMock.Object);
+        Localization.Configure(_localizerMock.Object);
 
         DataValueDto value = new() { Title = name };
 
@@ -37,7 +39,7 @@ public class LocalizationExtensionsTests
         Mock<IStringLocalizer<Resources>> _localizerMock = new();
         _localizerMock.Setup(_ => _["Midfielder"]).Returns(new LocalizedString("Midfielder", "Півзахисник"));
         _localizerMock.Setup(_ => _["Goalkeeper"]).Returns(new LocalizedString("Goalkeeper", "Воротар"));
-        Messages.Configure(_localizerMock.Object);
+        Localization.Configure(_localizerMock.Object);
 
         IEnumerable<DataValueDto> values = new List<DataValueDto> {
             new() { Title = "Midfielder" },

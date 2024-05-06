@@ -4,6 +4,7 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 
 using SFC.Data.Api.Middlewares;
+using SFC.Data.Application.Common.Constants;
 using SFC.Data.Application.Common.Exceptions;
 using SFC.Data.Application.Models.Base;
 
@@ -25,7 +26,7 @@ public class ExceptionHandlerMiddlewareTests
         await middleware.InvokeAsync(httpContext);
 
         // Assert
-        Assert.Equal("application/json", httpContext.Response.ContentType);
+        Assert.Equal(CommonConstants.CONTENT_TYPE, httpContext.Response.ContentType);
     }
 
     [Fact]

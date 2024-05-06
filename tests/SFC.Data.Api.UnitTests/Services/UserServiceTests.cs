@@ -8,6 +8,8 @@ using SFC.Data.Api.Services;
 using SFC.Data.Application.Common.Constants;
 using SFC.Data.Application.Common.Exceptions;
 
+using Localization = SFC.Data.Application.Common.Constants.Messages;
+
 namespace SFC.Data.Api.UnitTests.Services;
 public class UserServiceTests
 {
@@ -47,6 +49,6 @@ public class UserServiceTests
         AuthorizationException assertException = Assert.Throws<AuthorizationException>(() => service.UserId);
 
         // Assert
-        Assert.Equal(Messages.AuthorizationError, assertException.Message);
+        Assert.Equal(Localization.AuthorizationError, assertException.Message);
     }
 }

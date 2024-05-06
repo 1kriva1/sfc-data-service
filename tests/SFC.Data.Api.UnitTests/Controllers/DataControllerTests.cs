@@ -15,6 +15,8 @@ using SFC.Data.Application.Interfaces.Identity;
 using SFC.Data.Application.Models.Base;
 using SFC.Data.Application.Models.Data.GetAll;
 
+using Localization = SFC.Data.Application.Common.Constants.Messages;
+
 namespace SFC.Data.Api.UnitTests.Controllers;
 public class DataControllerTests
 {
@@ -65,6 +67,6 @@ public class DataControllerTests
         T response = Assert.IsType<T>(objectResult.Value);
 
         Assert.True(response?.Success);
-        Assert.Equal(Messages.SuccessResult, response?.Message);
+        Assert.Equal(Localization.SuccessResult, response?.Message);
     }
 }

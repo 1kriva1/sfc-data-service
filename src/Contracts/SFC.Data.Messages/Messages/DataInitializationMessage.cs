@@ -1,12 +1,10 @@
-﻿using SFC.Data.Contracts.Models;
-using SFC.Data.Contracts.Models.Common;
+﻿using SFC.Data.Messages.Models;
+using SFC.Data.Messages.Models.Common;
 
-namespace SFC.Data.Contracts.Events;
+namespace SFC.Data.Messages.Messages;
 
-public record DataInitializationEvent
+public class DataInitializationMessage: BaseMessage
 {
-    public string Initiator { get; init; } = string.Empty;
-
     public IEnumerable<DataValue> FootballPositions { get; init; } = Enumerable.Empty<DataValue>();
 
     public IEnumerable<DataValue> GameStyles { get; init; } = Enumerable.Empty<DataValue>();

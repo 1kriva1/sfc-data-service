@@ -2,15 +2,20 @@
 
 using SFC.Data.Application.Common.Constants;
 
+using Localization = SFC.Data.Application.Common.Constants.Messages;
+
 namespace SFC.Data.Application.Models.Base;
 
+/// <summary>
+/// **Base** response model.
+/// </summary>
 [JsonDerivedType(typeof(BaseErrorResponse))]
 public class BaseResponse
 {
     public BaseResponse()
     {
         Success = true;
-        Message = Messages.SuccessResult;
+        Message = Localization.SuccessResult;
     }
     public BaseResponse(string message)
     {
@@ -25,9 +30,16 @@ public class BaseResponse
         Message = message;
     }
 
+
+    /// <summary>
+    /// Determined if response has **success** result.
+    /// </summary>
     [JsonPropertyOrder(0)]
     public bool Success { get; }
 
+    /// <summary>
+    /// Describe response **result**.
+    /// </summary>
     [JsonPropertyOrder(1)]
     public string Message { get; }
 }

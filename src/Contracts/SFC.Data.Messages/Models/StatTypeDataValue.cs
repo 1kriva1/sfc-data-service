@@ -1,6 +1,6 @@
-﻿using SFC.Data.Contracts.Models.Common;
+﻿using SFC.Data.Messages.Models.Common;
 
-namespace SFC.Data.Contracts.Models;
+namespace SFC.Data.Messages.Models;
 public class StatTypeDataValue: DataValue
 {
     public int CategoryId { get; set; }

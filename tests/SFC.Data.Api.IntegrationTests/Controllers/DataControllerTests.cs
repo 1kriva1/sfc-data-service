@@ -5,6 +5,8 @@ using SFC.Data.Api.IntegrationTests.Fixtures;
 using SFC.Data.Application.Common.Constants;
 using SFC.Data.Application.Models.Data.GetAll;
 
+using Localization = SFC.Data.Application.Common.Constants.Messages;
+
 namespace SFC.Data.Api.IntegrationTests.Controllers;
 public class DataControllerTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {
@@ -35,7 +37,7 @@ public class DataControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
 
         Assert.IsType<GetAllResponse>(responseValue);
         Assert.True(responseValue.Success);
-        Assert.Equal(Messages.SuccessResult, responseValue.Message);
+        Assert.Equal(Localization.SuccessResult, responseValue.Message);
         Assert.Null(responseValue.Errors);
         Assert.NotEmpty(responseValue.StatSkills);
         Assert.NotEmpty(responseValue.StatCategories);
@@ -64,7 +66,7 @@ public class DataControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
 
         GetAllResponse? responseValue = JsonSerializer.Deserialize<GetAllResponse>(responseString);
 
-        Assert.Equal(Messages.SuccessResult, responseValue!.Message);
+        Assert.Equal(Localization.SuccessResult, responseValue!.Message);
     }
 
     [Fact]

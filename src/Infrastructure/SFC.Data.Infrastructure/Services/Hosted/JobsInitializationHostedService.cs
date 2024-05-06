@@ -1,7 +1,6 @@
 ﻿using Hangfire;
 
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -10,23 +9,21 @@ using SFC.Data.Application.Interfaces.Cache;
 using SFC.Data.Application.Settings;
 
 namespace SFC.Data.Infrastructure.Services.Hosted;
-public class JobsInitializationHostedService : IHostedService
+public class JobsInitializationHostedService : BaseInitializationService
 {
-    private readonly ILogger<JobsInitializationHostedService> _logger;
     private readonly IServiceProvider _services;
     private readonly IOptions<CacheSettings> _cacheConfig;
 
     public JobsInitializationHostedService(
         ILogger<JobsInitializationHostedService> logger,
         IServiceProvider services,
-        IOptions<CacheSettings> cacheConfig)
+        IOptions<CacheSettings> cacheConfig) : base(logger)
     {
-        _logger = logger;
         _services = services;
         _cacheConfig = cacheConfig;
     }
 
-    public Task StartAsync(CancellationToken cancellationToken)
+    protected override Task ExecuteAsync(CancellationToken cancellationToken)
     {
         _logger.LogInformation("Jobs Initialization Hosted Service running.");
 
@@ -37,12 +34,6 @@ public class JobsInitializationHostedService : IHostedService
             AddCacheRefreshJob(cancellationToken);
         }
 
-        return Task.CompletedTask;
-    }
-
-    public Task StopAsync(CancellationToken cancellationToken)
-    {
-        _logger.LogInformation("Jobs Initialization Hosted Servic is stopping.");
         return Task.CompletedTask;
     }
 

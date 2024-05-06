@@ -5,6 +5,8 @@ using Newtonsoft.Json.Linq;
 using SFC.Data.Application.Common.Constants;
 using SFC.Data.Application.Models.Base;
 
+using Localization = SFC.Data.Application.Common.Constants.Messages;
+
 namespace SFC.Data.Application.UnitTests.Common.Models;
 public class BaseResponseTests
 {
@@ -16,7 +18,7 @@ public class BaseResponseTests
         BaseResponse response = new();
 
         // Assert
-        Assert.Equal(Messages.SuccessResult, response.Message);
+        Assert.Equal(Localization.SuccessResult, response.Message);
         Assert.True(response.Success);
     }
 

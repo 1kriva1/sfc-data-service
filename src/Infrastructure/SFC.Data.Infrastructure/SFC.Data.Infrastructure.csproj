@@ -16,7 +16,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Contracts\SFC.Data.Contracts\SFC.Data.Contracts.csproj" />
         <ProjectReference Include="..\..\Core\SFC.Data.Application\SFC.Data.Application.csproj" />
         <ProjectReference Include="..\SFC.Data.Infrastructure.Persistence\SFC.Data.Infrastructure.Persistence.csproj" />
     </ItemGroup>

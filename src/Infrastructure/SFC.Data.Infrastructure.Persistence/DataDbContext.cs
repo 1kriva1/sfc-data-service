@@ -50,7 +50,7 @@ public class DataDbContext : DbContext, IDataDbContext
 
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-        builder.SeedData(_dateTimeService);
+        builder.Seed(_dateTimeService);
 
         base.OnModelCreating(builder);
     }

@@ -4,14 +4,14 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <PackageId>SFC.Data.Contracts</PackageId>
-        <Version>0.0.3</Version>
+        <PackageId>SFC.Data.Messages</PackageId>
+        <Version>0.0.1</Version>
         <Authors>Andrii Kryvoruk</Authors>
         <Company>SFC</Company>
         <Product>SFC</Product>
-        <PackageTags>Street Football Club;SFC;contracts</PackageTags>
+        <PackageTags>Street Football Club;SFC;messages</PackageTags>
         <Description>
-            Contracts from Data service for SFC project
+            Messages from Data service for SFC project
         </Description>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     </PropertyGroup>

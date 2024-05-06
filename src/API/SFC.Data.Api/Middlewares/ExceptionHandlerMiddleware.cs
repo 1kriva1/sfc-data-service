@@ -6,6 +6,7 @@ using SFC.Data.Application.Common.Exceptions;
 using SFC.Data.Application.Models.Base;
 
 using ExceptionType = System.Exception;
+using Localization = SFC.Data.Application.Common.Constants.Messages;
 
 namespace SFC.Data.Api.Middlewares;
 
@@ -47,12 +48,12 @@ public class ExceptionHandlerMiddleware
         ExceptionResponse response = _exceptionHandlers.TryGetValue(exceptionType, out Handler? handler)
             ? handler.Invoke(exception)
             : new(HttpStatusCode.InternalServerError, new BaseResponse(
-                Messages.FailedResult,
+                Localization.FailedResult,
                 false));
 
         context.Response.StatusCode = (int)response.StatusCode;
 
-        context.Response.ContentType = context.Request.ContentType ?? "application/json";
+        context.Response.ContentType = context.Request.ContentType ?? CommonConstants.CONTENT_TYPE;
 
         return context.Response.WriteAsync(JsonSerializer.Serialize(response.Result));
     }

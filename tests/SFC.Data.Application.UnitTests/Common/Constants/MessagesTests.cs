@@ -4,6 +4,8 @@ using Moq;
 
 using SFC.Data.Application.Common.Constants;
 
+using Localization = SFC.Data.Application.Common.Constants.Messages;
+
 namespace SFC.Data.Application.UnitTests.Common.Constants;
 public class MessagesTests
 {
@@ -11,7 +13,7 @@ public class MessagesTests
 
     public MessagesTests()
     {
-        Messages.Configure(_localizerMock.Object);
+        Localization.Configure(_localizerMock.Object);
     }
 
     [Fact]
@@ -20,11 +22,11 @@ public class MessagesTests
     {
         // Arrange
         string localizedValue = "This is success result.";
-        LocalizedString localizedString = new(nameof(Messages.SuccessResult), localizedValue);
-        _localizerMock.Setup(_ => _[nameof(Messages.SuccessResult)]).Returns(localizedString);
+        LocalizedString localizedString = new(nameof(Localization.SuccessResult), localizedValue);
+        _localizerMock.Setup(_ => _[nameof(Localization.SuccessResult)]).Returns(localizedString);
 
         // Assert
-        Assert.Equal(localizedValue, Messages.SuccessResult);
+        Assert.Equal(localizedValue, Localization.SuccessResult);
     }
 
     [Fact]
@@ -32,7 +34,7 @@ public class MessagesTests
     public void Constants_Messages_ShouldReturnDefaultTranslation()
     {
         // Assert
-        Assert.Equal("Success result.", Messages.SuccessResult);
+        Assert.Equal("Success result.", Localization.SuccessResult);
     }
 
     [Fact]
@@ -42,10 +44,10 @@ public class MessagesTests
         // Arrange
         string localizedValue = "This is success result.";
         LocalizedString localizedString = new("Key", localizedValue, true);
-        _localizerMock.Setup(_ => _[nameof(Messages.SuccessResult)]).Returns(localizedString);
+        _localizerMock.Setup(_ => _[nameof(Localization.SuccessResult)]).Returns(localizedString);
 
         // Assert
-        Assert.Equal("Success result.", Messages.SuccessResult);
+        Assert.Equal("Success result.", Localization.SuccessResult);
     }
 
     [Fact(Skip = "TODO: understand why sometimes it fail")]
@@ -59,7 +61,7 @@ public class MessagesTests
         _localizerMock.Setup(_ => _[name]).Returns(localizedString);
 
         // Assert
-        Assert.Equal(localizedValue, Messages.GetDataValue(name));
+        Assert.Equal(localizedValue, Localization.GetDataValue(name));
     }
 
     [Fact]
@@ -73,6 +75,6 @@ public class MessagesTests
         _localizerMock.Setup(_ => _["Forward"]).Returns(localizedString);
 
         // Assert
-        Assert.Equal(name, Messages.GetDataValue(name));
+        Assert.Equal(name, Localization.GetDataValue(name));
     }
 }
