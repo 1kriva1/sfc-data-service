@@ -1,23 +1,37 @@
 ﻿using System.Text;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
 using SFC.Data.Api.Services;
 using SFC.Data.Application;
 using SFC.Data.Application.Common.Constants;
 using SFC.Data.Application.Interfaces.Identity;
+using SFC.Data.Application.Models.Base;
+using SFC.Data.Infrastructure.Extensions;
 using SFC.Data.Infrastructure.Settings;
 
 namespace SFC.Data.Api.Extensions;
 
 public static class ServiceExtensions
 {
-    public static void AddControllers(this WebApplicationBuilder builder)
+    public static void AddControllers(this IServiceCollection services)
     {
-        builder.Services.AddControllers(options =>
+        services.AddControllers(configure =>
         {
-            options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+            configure.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+
+            // Return 406 when Accept is not application/json
+            configure.ReturnHttpNotAcceptable = true;
+
+            // Accept and Content-Type headers filters
+            configure.Filters.Add(new ProducesAttribute(CommonConstants.CONTENT_TYPE));
+            configure.Filters.Add(new ConsumesAttribute(CommonConstants.CONTENT_TYPE));
+
+            // Global responses filters
+            configure.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
+            configure.Filters.Add(new ProducesResponseTypeAttribute(typeof(BaseResponse), StatusCodes.Status500InternalServerError));            
         })
         .AddJsonOptions(options =>
         {
@@ -30,9 +44,9 @@ public static class ServiceExtensions
                 factory.Create(typeof(Resources)));
     }
 
-    public static void AddApiServices(this WebApplicationBuilder builder)
+    public static void AddServices(this IServiceCollection services)
     {
-        builder.Services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IUserService, UserService>();
     }
 
     public static void AddAuthentication(this WebApplicationBuilder builder)
@@ -48,9 +62,7 @@ public static class ServiceExtensions
             options.SaveToken = true;
             options.RequireHttpsMetadata = false;
 
-            JwtSettings jwtSettings = builder.Configuration
-                .GetSection(JwtSettings.SECTION_KEY)
-                .Get<JwtSettings>()!;
+            JwtSettings jwtSettings = builder.Configuration.GetJwtSettings();
 
             options.TokenValidationParameters = new TokenValidationParameters()
             {
@@ -64,14 +76,5 @@ public static class ServiceExtensions
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
             };
         });
-    }
-
-    public static void AddLocalization(this WebApplicationBuilder builder)
-    {
-        builder.Services.AddLocalization(options => options.ResourcesPath = CommonConstants.RESOURCE_PATH);
-
-        builder.Services.Configure<RequestLocalizationOptions>(options => options.SetDefaultCulture(CommonConstants.SUPPORTED_CULTURES[0])
-                .AddSupportedCultures(CommonConstants.SUPPORTED_CULTURES)
-                .AddSupportedUICultures(CommonConstants.SUPPORTED_CULTURES));
     }
 }

@@ -7,7 +7,7 @@ using SFC.Data.Domain.Entities;
 namespace SFC.Data.Infrastructure.Persistence.Seeds.Data;
 public static class DataSeed
 {
-    public static void SeedData(this ModelBuilder builder, IDateTimeService dateTimeService)
+    public static void Seed(this ModelBuilder builder, IDateTimeService dateTimeService)
     {
         List<BaseDataEntity> footballPositions = new() {
             new FootballPosition { Id = 0, Title = "Goalkeeper" },

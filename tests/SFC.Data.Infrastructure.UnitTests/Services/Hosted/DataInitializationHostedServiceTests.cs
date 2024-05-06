@@ -4,7 +4,8 @@ using Microsoft.Extensions.Logging;
 
 using Moq;
 
-using SFC.Data.Application.Interfaces.Initialization;
+using SFC.Data.Application.Interfaces.Data;
+using SFC.Data.Messages.Enums;
 using SFC.Data.Infrastructure.Services.Hosted;
 
 namespace SFC.Data.Infrastructure.UnitTests.Services.Hosted;
@@ -19,7 +20,7 @@ public class DataInitializationHostedServiceTests
         // Arrange
         IServiceCollection services = new ServiceCollection();
         Mock<IDataService> dataServiceMock = new();
-        dataServiceMock.Setup(r => r.InitAsync("data.init")).Verifiable();
+        dataServiceMock.Setup(r => r.InitAsync(DataInitiator.Init)).Verifiable();
         services.AddSingleton(dataServiceMock.Object);
 
         IHostedService service = new DataInitializationHostedService(_loggerMock.Object, services.BuildServiceProvider());
@@ -28,7 +29,7 @@ public class DataInitializationHostedServiceTests
         await service.StartAsync(new CancellationToken());
 
         // Assert
-        dataServiceMock.Verify(mock => mock.InitAsync("data.init"), Times.Once());
+        dataServiceMock.Verify(mock => mock.InitAsync(DataInitiator.Init), Times.Once());
     }
 
     [Fact]
@@ -38,7 +39,7 @@ public class DataInitializationHostedServiceTests
         // Arrange
         IServiceCollection services = new ServiceCollection();
         Mock<IDataService> dataServiceMock = new();
-        dataServiceMock.Setup(r => r.InitAsync("data.players")).Verifiable();
+        dataServiceMock.Setup(r => r.InitAsync(DataInitiator.Player)).Verifiable();
         services.AddSingleton(dataServiceMock.Object);
 
         IHostedService service = new DataInitializationHostedService(_loggerMock.Object, services.BuildServiceProvider());
@@ -47,6 +48,6 @@ public class DataInitializationHostedServiceTests
         await service.StartAsync(new CancellationToken());
 
         // Assert
-        dataServiceMock.Verify(mock => mock.InitAsync("data.players"), Times.Never());
+        dataServiceMock.Verify(mock => mock.InitAsync(DataInitiator.Player), Times.Never());
     }
 }

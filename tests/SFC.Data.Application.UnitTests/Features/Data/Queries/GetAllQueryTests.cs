@@ -9,7 +9,7 @@ using SFC.Data.Application.Common.Mappings;
 using SFC.Data.Application.Features.Common.Models;
 using SFC.Data.Application.Features.Data.Queries.GetAll;
 using SFC.Data.Application.Features.Data.Queries.GetAll.Dto;
-using SFC.Data.Application.Interfaces.Initialization;
+using SFC.Data.Application.Interfaces.Data;
 using SFC.Data.Domain.Entities;
 
 namespace SFC.Data.Application.UnitTests.Features.Data.Queries;

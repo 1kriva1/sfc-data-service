@@ -1,4 +1,4 @@
-﻿namespace SFC.Data.Contracts.Models.Common;
+﻿namespace SFC.Data.Messages.Models.Common;
 public class DataValue
 {
     public int Id { get; set; }

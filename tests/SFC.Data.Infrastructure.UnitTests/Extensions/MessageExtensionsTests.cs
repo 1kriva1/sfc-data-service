@@ -1,15 +1,15 @@
-﻿using SFC.Data.Contracts.Models;
-using SFC.Data.Contracts.Models.Common;
+﻿using SFC.Data.Messages.Models;
+using SFC.Data.Messages.Models.Common;
 using SFC.Data.Domain.Common;
 using SFC.Data.Domain.Entities;
 using SFC.Data.Infrastructure.Extensions;
 
 namespace SFC.Data.Infrastructure.UnitTests.Extensions;
-public class EventsExtensionsTests
+public class MessageExtensionsTests
 {
     [Fact]
-    [Trait("Extension", "Events")]
-    public void Extension_Events_ShouldMapToDataValue()
+    [Trait("Extension", "Message")]
+    public void Extension_Message_ShouldMapToDataValue()
     {
         // Arrange
         BaseDataEntity entity = new() { Id = 0, Title = "Title" };
@@ -23,8 +23,8 @@ public class EventsExtensionsTests
     }
 
     [Fact]
-    [Trait("Extension", "Events")]
-    public void Extension_Events_ShouldMapToStatTypeDataValue()
+    [Trait("Extension", "Message")]
+    public void Extension_Message_ShouldMapToStatTypeDataValue()
     {
         // Arrange
         StatType entity = new() { Id = 0, Title = "Title", CategoryId = 1, SkillId = 2 };

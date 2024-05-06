@@ -13,9 +13,7 @@ public static class HangfireExtensions
 {
     public static IServiceCollection AddHangfire(this IServiceCollection services, IConfiguration configuration)
     {
-        HangfireSettings settings = configuration
-                    .GetSection(HangfireSettings.SECTION_KEY)
-                    .Get<HangfireSettings>()!;
+        HangfireSettings settings = configuration.GetHangfireSettings();
 
         // Add Hangfire services.
         services.AddHangfire(config => config

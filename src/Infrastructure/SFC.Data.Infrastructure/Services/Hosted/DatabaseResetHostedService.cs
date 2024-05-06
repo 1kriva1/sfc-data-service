@@ -6,23 +6,21 @@ using Microsoft.Extensions.Logging;
 using SFC.Data.Infrastructure.Persistence;
 
 namespace SFC.Data.Infrastructure.Services.Hosted;
-public class DatabaseResetHostedService : IHostedService
+public class DatabaseResetHostedService : BaseInitializationService
 {
-    private readonly ILogger<DatabaseResetHostedService> _logger;
     private readonly IServiceProvider _services;
     private readonly IHostEnvironment _hostEnvironment;
 
     public DatabaseResetHostedService(
         ILogger<DatabaseResetHostedService> logger,
         IServiceProvider services,
-        IHostEnvironment hostEnvironment)
+        IHostEnvironment hostEnvironment):base(logger)
     {
-        _logger = logger;
         _services = services;
         _hostEnvironment = hostEnvironment;
     }
 
-    public async Task StartAsync(CancellationToken cancellationToken)
+    protected override async Task ExecuteAsync(CancellationToken cancellationToken)
     {
         _logger.LogInformation("Data Initialization Hosted Service running.");
 
@@ -41,11 +39,5 @@ public class DatabaseResetHostedService : IHostedService
         }
 
         await context.Database.EnsureCreatedAsync(cancellationToken);
-    }
-
-    public Task StopAsync(CancellationToken cancellationToken)
-    {
-        _logger.LogInformation("Data Initialization Hosted Servic is stopping.");
-        return Task.CompletedTask;
     }
 }

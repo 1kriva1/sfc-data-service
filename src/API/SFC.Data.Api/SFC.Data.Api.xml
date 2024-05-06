@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SFC.Data.Api</name>
+    </assembly>
+    <members>
+        <member name="M:SFC.Data.Api.Controllers.DataController.GetAllAsync">
+            <summary>
+            Return all available data types.
+            </summary>
+            <returns>An ActionResult of type GetAllResponse</returns>
+            <response code="200">Returns all available **data types**.</response>
+            <response code="401">Returns when **failed** authentication.</response>
+        </member>
+    </members>
+</doc>

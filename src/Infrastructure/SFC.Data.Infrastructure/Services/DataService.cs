@@ -1,11 +1,12 @@
 ﻿using MassTransit;
 
-using SFC.Data.Application.Interfaces.Initialization;
+using SFC.Data.Application.Interfaces.Data;
 using SFC.Data.Application.Interfaces.Persistence;
 using SFC.Data.Domain.Entities;
-using SFC.Data.Contracts.Events;
+using SFC.Data.Messages.Messages;
 using SFC.Data.Infrastructure.Extensions;
 using SFC.Data.Application.Features.Common.Models;
+using SFC.Data.Messages.Enums;
 
 namespace SFC.Data.Infrastructure.Services;
 public class DataService : IDataService
@@ -49,11 +50,11 @@ public class DataService : IDataService
         };
     }
 
-    public async Task InitAsync(string routingKey)
+    public async Task InitAsync(DataInitiator initiator)
     {
         DataModel model = await GetAsync();
 
-        DataInitializationEvent @event = new()
+        DataInitializationMessage message = new()
         {
             FootballPositions = model.FootballPositions.Select(entity => entity.MapToDataValue()),
             GameStyles = model.GameStyles.Select(entity => entity.MapToDataValue()),
@@ -61,9 +62,9 @@ public class DataService : IDataService
             StatSkills = model.StatSkills.Select(entity => entity.MapToDataValue()),
             StatTypes = model.StatTypes.Select(entity => entity.MapToDataValue()),
             WorkingFoots = model.WorkingFoots.Select(entity => entity.MapToDataValue()),
-            Initiator = routingKey
+            Initiator = initiator
         };
 
-        await _publisher.Publish(@event);
+        await _publisher.Publish(message);
     }
 }

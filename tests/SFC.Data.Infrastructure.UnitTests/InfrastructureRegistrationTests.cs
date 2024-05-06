@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using SFC.Data.Application.Interfaces.Common;
-using SFC.Data.Application.Interfaces.Initialization;
+using SFC.Data.Application.Interfaces.Data;
 using SFC.Data.Infrastructure.Services.Hosted;
 using SFC.Data.Infrastructure.Persistence;
 using SFC.Data.Application;
@@ -31,7 +31,13 @@ public class InfrastructureRegistrationTests
             {"RabbitMq:Password", "guest"},
             {"RabbitMq:Name", "SFC.Players"},
             {"RabbitMq:Retry:Limit", "5"},
-            {"RabbitMq:Retry:Intervals:0", "15"}
+            {"RabbitMq:Retry:Intervals:0", "15"},
+            {"RabbitMq:Exchanges:Data:Key", "data"},
+            {"RabbitMq:Exchanges:Data:Value:Init:Name", "sfc.data.init"},
+            {"RabbitMq:Exchanges:Data:Value:Init:Type", "direct"},
+            {"RabbitMq:Exchanges:Data:Value:Require:Name", "sfc.data.require"},
+            {"RabbitMq:Exchanges:Data:Value:Require:Type", "direct"},
+            {"RabbitMq:Exchanges:Data:Value:Require:RoutingKey", "DATA_REQUIRE"}
         };
 
         _builder.Configuration.AddInMemoryCollection(initialData!);

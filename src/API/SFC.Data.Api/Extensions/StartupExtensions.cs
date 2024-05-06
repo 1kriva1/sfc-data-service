@@ -15,7 +15,7 @@ public static class StartupExtensions
 
         builder.AddInfrastructureServices();
 
-        builder.AddApiServices();
+        builder.Services.AddServices();
 
         builder.Services.AddHttpContextAccessor();
 
@@ -23,11 +23,16 @@ public static class StartupExtensions
 
         builder.Services.AddCors();
 
-        builder.AddControllers();
+        builder.Services.AddControllers();
 
-        builder.AddLocalization();
+        builder.Services.AddLocalization();
 
         builder.AddAuthentication();
+
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.Services.AddSwagger();
+        }
 
         return builder.Build();
     }
@@ -40,6 +45,11 @@ public static class StartupExtensions
             .AllowAnyHeader()
             .SetIsOriginAllowed(origin => true) // allow any origin
             .AllowCredentials()); // allow credentials
+
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+        }
 
         app.UseHttpsRedirection();
 
