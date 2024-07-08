@@ -46,7 +46,7 @@ public class DataDbContext : DbContext, IDataDbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.HasDefaultSchema(DbConstants.DEFAULT_SCHEMA_NAME);
+        builder.HasDefaultSchema(DatabaseConstants.DEFAULT_SCHEMA_NAME);
 
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 

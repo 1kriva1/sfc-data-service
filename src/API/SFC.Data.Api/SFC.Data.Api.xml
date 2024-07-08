@@ -11,6 +11,7 @@
             <returns>An ActionResult of type GetAllResponse</returns>
             <response code="200">Returns all available **data types**.</response>
             <response code="401">Returns when **failed** authentication.</response>
+            <response code="403">Returns when **failed** authorization.</response>
         </member>
     </members>
 </doc>

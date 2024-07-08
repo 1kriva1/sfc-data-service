@@ -12,26 +12,21 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SFC.Data.Infrastructure.Persistence;
 using SFC.Players.Infrastructure.Consumers;
+using SFC.Data.Application.Common.Constants;
 
 namespace SFC.Data.Api.IntegrationTests.Fixtures;
 public class CustomWebApplicationFactory<TStartup>
        : WebApplicationFactory<TStartup> where TStartup : class
 {
-    private const string TEST_ENVIROMENT = "Testing";
-
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureServices(services =>
         {
-            ServiceDescriptor? dbContextDescriptor = services.SingleOrDefault(d =>
-                d.ServiceType == typeof(DbContextOptions<DataDbContext>));
+            // remove db contexts
+            RemoveServiceDescriptor<DbContextOptions<DataDbContext>>(services);
 
-            services.Remove(dbContextDescriptor!);
-
-            ServiceDescriptor? dbConnectionDescriptor = services.SingleOrDefault(d =>
-                d.ServiceType == typeof(DbConnection));
-
-            services.Remove(dbConnectionDescriptor!);
+            // remove db connection
+            RemoveServiceDescriptor<DbConnection>(services);
 
             services.AddSingleton<DbConnection>(container =>
             {
@@ -41,17 +36,24 @@ public class CustomWebApplicationFactory<TStartup>
                 return connection;
             });
 
-            services.AddDbContext<DataDbContext>((container, options) =>
-            {
-                DbConnection connection = container.GetRequiredService<DbConnection>();
-                options.UseSqlite(connection);
-            });
+            // switch db context connection to sqllite db
+            services.AddDbContext<DataDbContext>(SwitchToSqliteConnection);
 
             services.AddMassTransitTestHarness(configure => configure.AddConsumer<DataRequireMessageConsumer>());
 
             services.AddHangfire(x => x.UseMemoryStorage());
         });
+    }
 
-        builder.UseEnvironment(TEST_ENVIROMENT);
+    private static void RemoveServiceDescriptor<T>(IServiceCollection services)
+    {
+        ServiceDescriptor? serviceDescriptor = services.SingleOrDefault(d => d.ServiceType == typeof(T));
+        services.Remove(serviceDescriptor!);
+    }
+
+    private static void SwitchToSqliteConnection(IServiceProvider container, DbContextOptionsBuilder options)
+    {
+        DbConnection connection = container.GetRequiredService<DbConnection>();
+        options.UseSqlite(connection);
     }
 }

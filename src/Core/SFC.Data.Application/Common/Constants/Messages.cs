@@ -40,7 +40,7 @@ public class Messages
         return @string == null
             ? defaultValue
             : @string.ResourceNotFound
-            ? defaultValue
-            : @string.Value;
+                ? defaultValue
+                : @string.Value;
     }
 }

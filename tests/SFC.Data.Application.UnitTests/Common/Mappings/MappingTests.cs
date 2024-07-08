@@ -1,7 +1,6 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Text.Json;
 
 using AutoMapper;
-using AutoMapper.Internal;
 
 using SFC.Data.Application.Common.Mappings;
 using SFC.Data.Application.Features.Data.Queries.GetAll;
@@ -13,17 +12,12 @@ using SFC.Data.Domain.Entities;
 namespace SFC.Data.Application.UnitTests.Common.Mappings;
 public class MappingTests
 {
-    private readonly IConfigurationProvider _configuration;
+    private readonly MapperConfiguration _configuration;
     private readonly IMapper _mapper;
 
     public MappingTests()
     {
-        _configuration = new MapperConfiguration(config =>
-        {
-            config.Internal().AllowAdditiveTypeMapCreation = true;
-            config.AddProfile<MappingProfile>();
-        });
-
+        _configuration = new MapperConfiguration(config => config.AddProfile<MappingProfile>());
         _mapper = _configuration.CreateMapper();
     }
 
@@ -36,7 +30,7 @@ public class MappingTests
     }
 
     [Theory]
-    [Trait("Mapping", "GetAll")]
+    [Trait("Mapping", "Models")]
     [InlineData(typeof(GetAllViewModel), typeof(GetAllResponse))]
     [InlineData(typeof(BaseDataEntity), typeof(DataValueDto))]
     [InlineData(typeof(FootballPosition), typeof(DataValueDto))]
@@ -45,16 +39,16 @@ public class MappingTests
     [InlineData(typeof(StatSkill), typeof(DataValueDto))]
     [InlineData(typeof(StatType), typeof(StatTypeDataValueDto))]
     [InlineData(typeof(WorkingFoot), typeof(DataValueDto))]
-    public void Mapping_GetPlayerByUser_ShouldHaveValidConfiguration(Type source, Type destination)
+    public void Mapping_Models_ShouldHaveValidConfiguration(Type source, Type destination)
     {
         // Arrange
-        object instance = GetInstanceOf(source);
+        object? instance = GetInstanceOf(source);
 
         // Assert
         _mapper.Map(instance, source, destination);
     }
 
-    private static object GetInstanceOf(Type type)
+    private static object? GetInstanceOf(Type type)
     {
         if (type.GetConstructor(Type.EmptyTypes) != null)
             return Activator.CreateInstance(type)!;
@@ -62,7 +56,7 @@ public class MappingTests
         if (type == typeof(string))
             return string.Empty;
 
-        // Type without parameterless constructor
-        return FormatterServices.GetUninitializedObject(type);
+        string json = JsonSerializer.Serialize(type);
+        return JsonSerializer.Deserialize<object>(json);
     }
 }
