@@ -8,14 +8,9 @@ using SFC.Data.Application.Models.Data.GetAll;
 using Localization = SFC.Data.Application.Common.Constants.Messages;
 
 namespace SFC.Data.Api.IntegrationTests.Controllers;
-public class DataControllerTests : IClassFixture<CustomWebApplicationFactory<Program>>
+public class DataControllerTests(CustomWebApplicationFactory<Program> factory) : IClassFixture<CustomWebApplicationFactory<Program>>
 {
-    private readonly CustomWebApplicationFactory<Program> _factory;
-
-    public DataControllerTests(CustomWebApplicationFactory<Program> factory)
-    {
-        _factory = factory;
-    }
+    private readonly CustomWebApplicationFactory<Program> _factory = factory;
 
     [Fact]
     [Trait("API", "Integration")]
@@ -26,7 +21,7 @@ public class DataControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
                                     .SetAuthenticationToken();
 
         // Act
-        HttpResponseMessage response = await client.GetAsync("/api/data");
+        HttpResponseMessage response = await client.GetAsync(Constants.API_DATA);
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -54,10 +49,10 @@ public class DataControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         // Arrange
         HttpClient client = _factory.CreateClient()
                                     .SetAuthenticationToken();
-        client.DefaultRequestHeaders.Add("Accept-Language", CommonConstants.SUPPORTED_CULTURES[1]);
+        client.DefaultRequestHeaders.Add(Constants.ACCEPT_LANGUAGE, CommonConstants.SUPPORTED_CULTURES[1]);
 
         // Act
-        HttpResponseMessage response = await client.GetAsync("/api/data");
+        HttpResponseMessage response = await client.GetAsync(Constants.API_DATA);
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -77,9 +72,24 @@ public class DataControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         HttpClient client = _factory.CreateClient();
 
         // Act
-        HttpResponseMessage response = await client.GetAsync("/api/data");
+        HttpResponseMessage response = await client.GetAsync(Constants.API_DATA);
 
         // Assert
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+    }
+
+    [Fact]
+    [Trait("API", "Integration")]
+    public async Task API_Integration_GetAll_ShouldReturnForbidden()
+    {
+        // Arrange
+        HttpClient client = _factory.CreateClient()
+                                    .SetAuthenticationToken(forbidden: true);
+
+        // Act
+        HttpResponseMessage response = await client.GetAsync(Constants.API_DATA);
+
+        // Assert
+        Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
     }
 }

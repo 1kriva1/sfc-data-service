@@ -2,12 +2,11 @@
 
 using Newtonsoft.Json.Linq;
 
-using SFC.Data.Application.Common.Constants;
 using SFC.Data.Application.Models.Base;
 
 using Localization = SFC.Data.Application.Common.Constants.Messages;
 
-namespace SFC.Data.Application.UnitTests.Common.Models;
+namespace SFC.Data.Application.UnitTests.Models.Base;
 public class BaseResponseTests
 {
     [Fact]

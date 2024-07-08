@@ -24,12 +24,12 @@ public static class InfrastructureRegistration
 
         builder.Services.AddCache(builder.Configuration);
 
+        // custom services
         builder.Services.AddTransient<IDateTimeService, DateTimeService>();
-
         builder.Services.AddTransient<IDataService, DataService>();
 
+        // hosted services
         builder.Services.AddHostedService<DatabaseResetHostedService>();
-
         builder.Services.AddHostedService<JobsInitializationHostedService>();
 
         if (builder.Configuration.StartDataInitialization())

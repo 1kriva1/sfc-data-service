@@ -115,7 +115,7 @@ public class ConfigurationTests
 
         IMutableProperty titleProperty = properties.FirstOrDefault(m => m.Name == nameof(BaseDataEntity.Title))!;
         Assert.False(titleProperty.IsColumnNullable());
-        Assert.Equal(DbConstants.TITLE_VALUE_MAX_LENGTH, titleProperty.GetMaxLength());
+        Assert.Equal(DatabaseConstants.TITLE_VALUE_MAX_LENGTH, titleProperty.GetMaxLength());
 
         IMutableProperty createdDateProperty = properties.FirstOrDefault(m => m.Name == nameof(BaseDataEntity.CreatedDate))!;
         Assert.False(createdDateProperty.IsColumnNullable());

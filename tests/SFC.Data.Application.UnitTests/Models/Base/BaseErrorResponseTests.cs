@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 
 using SFC.Data.Application.Models.Base;
 
-namespace SFC.Data.Application.UnitTests.Common.Models;
+namespace SFC.Data.Application.UnitTests.Models.Base;
 public class BaseErrorResponseTests
 {
     [Fact]
@@ -24,7 +24,7 @@ public class BaseErrorResponseTests
 
     [Fact]
     [Trait("Model", "BaseErrorResponse")]
-    public void Model_BaseResponse_ShouldHaveCorrectPropertiesOrder()
+    public void Model_BaseErrorResponse_ShouldHaveCorrectPropertiesOrder()
     {
         // Arrange
         BaseErrorResponse response = new();

@@ -43,7 +43,7 @@ public class DataControllerTests
 
     [Fact]
     [Trait("API", "Controller")]
-    public async Task API_Controller_Data_ShouldReturnSuccessResponseForGetФдд()
+    public async Task API_Controller_Data_ShouldReturnSuccessResponseForGetAll()
     {
         // Arrange
         GetAllViewModel model = new() { };
