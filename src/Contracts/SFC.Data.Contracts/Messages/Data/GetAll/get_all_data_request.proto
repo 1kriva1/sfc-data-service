@@ -1,0 +1,7 @@
+﻿syntax = "proto3";
+
+package sfc_data;
+
+option csharp_namespace = "SFC.Data.Contracts.Messages.Data.GetAll";
+
+message GetAllDataRequest{}

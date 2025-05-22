@@ -1,59 +1,25 @@
 ﻿using System.Reflection;
 
-using AutoMapper;
+using SFC.Data.Application.Common.Mappings.Base;
+using SFC.Data.Application.Features.Data.Queries.GetAll.Dto;
+using SFC.Data.Domain.Common;
 
 namespace SFC.Data.Application.Common.Mappings;
-public class MappingProfile : Profile
+public class MappingProfile : BaseMappingProfile
 {
-    public MappingProfile()
-    {
-        Configure();
+    protected override Assembly Assembly => Assembly.GetExecutingAssembly();
 
-        ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
+    public MappingProfile() : base()
+    {
+        ApplyCustomMappings();
     }
 
-    private void Configure()
+    private void ApplyCustomMappings()
     {
-        AllowNullCollections = true;
-    }
+        #region Generic types
 
-    private void ApplyMappingsFromAssembly(Assembly assembly)
-    {
-        string mappingMethodName = nameof(IMapFrom<object>.Mapping);
+        CreateMap(typeof(EnumDataEntity<>), typeof(DataValueDto));
 
-        static bool HasInterface(Type t) => t.IsGenericType &&
-            (t.GetGenericTypeDefinition() == typeof(IMapFrom<>) || t.GetGenericTypeDefinition() == typeof(IMapFromReverse<>));
-
-        List<Type> types = assembly.GetExportedTypes()
-                                   .Where(t => t.GetInterfaces().Any(HasInterface) && !t.IsInterface)
-                                   .ToList();
-
-        Type[] argumentTypes = new Type[] { typeof(Profile) };
-
-        foreach (Type type in types)
-        {
-            object? instance = Activator.CreateInstance(type);
-
-            MethodInfo? methodInfo = type.GetMethod(mappingMethodName);
-
-            if (methodInfo != null)
-            {
-                methodInfo.Invoke(instance, new object[] { this });
-            }
-            else
-            {
-                List<Type> interfaces = type.GetInterfaces().Where(HasInterface).ToList();
-
-                if (interfaces.Count > 0)
-                {
-                    foreach (Type @interface in interfaces)
-                    {
-                        MethodInfo? interfaceMethodInfo = @interface.GetMethod(mappingMethodName, argumentTypes);
-
-                        interfaceMethodInfo?.Invoke(instance, new object[] { this });
-                    }
-                }
-            }
-        }
+        #endregion Generic types
     }
 }

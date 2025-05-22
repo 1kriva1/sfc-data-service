@@ -7,6 +7,8 @@ public static class MappingExtensions
 {
     public static IMappingExpression<TSource, TDestination> IgnoreAllNonExisting<TSource, TDestination>(this IMappingExpression<TSource, TDestination> expression)
     {
+        ArgumentNullException.ThrowIfNull(expression);
+
         BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
 
         Type sourceType = typeof(TSource);

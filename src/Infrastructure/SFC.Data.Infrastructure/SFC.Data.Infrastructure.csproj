@@ -1,21 +1,24 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
+      <PackageReference Include="Grpc.AspNetCore" Version="2.67.0" />
+      <PackageReference Include="Grpc.StatusProto" Version="2.67.0" />
       <PackageReference Include="Hangfire.AspNetCore" Version="1.8.14" />
       <PackageReference Include="Hangfire.Core" Version="1.8.14" />
       <PackageReference Include="Hangfire.SqlServer" Version="1.8.14" />
       <PackageReference Include="MassTransit" Version="8.2.3" />
       <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.3" />
       <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.6" />
+      <PackageReference Include="SFC.Invite.Messages" Version="0.0.9" />
+      <PackageReference Include="SFC.Player.Messages" Version="0.0.9" />
+      <PackageReference Include="SFC.Team.Messages" Version="0.0.20" />
+      <PackageReference Include="SFC.Request.Messages" Version="0.0.3" />
+      <PackageReference Include="SFC.Scheme.Messages" Version="0.0.2" />
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\Contracts\SFC.Data.Contracts\SFC.Data.Contracts.csproj" />
+        <ProjectReference Include="..\..\Contracts\SFC.Data.Messages\SFC.Data.Messages.csproj" />
         <ProjectReference Include="..\..\Core\SFC.Data.Application\SFC.Data.Application.csproj" />
         <ProjectReference Include="..\SFC.Data.Infrastructure.Persistence\SFC.Data.Infrastructure.Persistence.csproj" />
     </ItemGroup>

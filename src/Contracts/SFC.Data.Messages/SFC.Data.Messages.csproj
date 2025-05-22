@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PackageId>SFC.Data.Messages</PackageId>
-        <Version>0.0.1</Version>
+        <Version>0.0.8</Version>
         <Authors>Andrii Kryvoruk</Authors>
         <Company>SFC</Company>
         <Product>SFC</Product>

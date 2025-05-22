@@ -1,12 +1,10 @@
-﻿using Hangfire.SqlServer;
-using Hangfire;
+﻿using Hangfire;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using SFC.Data.Application.Settings;
-using SFC.Data.Infrastructure.Settings;
 using SFC.Data.Infrastructure.Filters.Hangfire;
+using SFC.Data.Infrastructure.Settings;
 
 namespace SFC.Data.Infrastructure.Extensions;
 public static class HangfireExtensions

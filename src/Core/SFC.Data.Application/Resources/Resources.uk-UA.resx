@@ -138,7 +138,7 @@
   <data name="Balance" xml:space="preserve">
     <value>Баланс</value>
   </data>
-  <data name="BallControl" xml:space="preserve">
+  <data name="Ball Control" xml:space="preserve">
     <value>Контроль м'яча</value>
   </data>
   <data name="Both" xml:space="preserve">
@@ -150,7 +150,7 @@
   <data name="Control" xml:space="preserve">
     <value>Контроль</value>
   </data>
-  <data name="CounterAttacks" xml:space="preserve">
+  <data name="Counter Attacks" xml:space="preserve">
     <value>Контратаки</value>
   </data>
   <data name="Crossing" xml:space="preserve">
@@ -159,7 +159,7 @@
   <data name="Curve" xml:space="preserve">
     <value>Закручування</value>
   </data>
-  <data name="DefAwarenence" xml:space="preserve">
+  <data name="Def Awarenence" xml:space="preserve">
     <value>Захисна обізнаність</value>
   </data>
   <data name="Defend" xml:space="preserve">
@@ -180,7 +180,7 @@
   <data name="Finishing" xml:space="preserve">
     <value>Завершення</value>
   </data>
-  <data name="FkAccuracy" xml:space="preserve">
+  <data name="Fk Accuracy" xml:space="preserve">
     <value>Точність штрафних ударів</value>
   </data>
   <data name="Forward" xml:space="preserve">
@@ -189,7 +189,7 @@
   <data name="Goalkeeper" xml:space="preserve">
     <value>Воротар</value>
   </data>
-  <data name="HeadingAccuracy" xml:space="preserve">
+  <data name="Heading Accuracy" xml:space="preserve">
     <value>Точність грою головою</value>
   </data>
   <data name="Interceptions" xml:space="preserve">
@@ -201,10 +201,10 @@
   <data name="Left" xml:space="preserve">
     <value>Ліва</value>
   </data>
-  <data name="LongPassing" xml:space="preserve">
+  <data name="Long Passing" xml:space="preserve">
     <value>Довгі паси</value>
   </data>
-  <data name="LongShots" xml:space="preserve">
+  <data name="Long Shots" xml:space="preserve">
     <value>Довгі удари</value>
   </data>
   <data name="Mental" xml:space="preserve">
@@ -240,25 +240,25 @@
   <data name="Shooting" xml:space="preserve">
     <value>Удари</value>
   </data>
-  <data name="ShortPassing" xml:space="preserve">
+  <data name="Short Passing" xml:space="preserve">
     <value>Короткі паси</value>
   </data>
-  <data name="ShotPower" xml:space="preserve">
+  <data name="Shot Power" xml:space="preserve">
     <value>Сила удару</value>
   </data>
   <data name="Skill" xml:space="preserve">
     <value>Майстерність</value>
   </data>
-  <data name="SlidingTackle" xml:space="preserve">
+  <data name="Sliding Tackle" xml:space="preserve">
     <value>Підкати</value>
   </data>
-  <data name="SprintSpeed" xml:space="preserve">
+  <data name="Sprint Speed" xml:space="preserve">
     <value>Швидкість бігу</value>
   </data>
   <data name="Stamina" xml:space="preserve">
     <value>Витривалість</value>
   </data>
-  <data name="StandingTackle" xml:space="preserve">
+  <data name="Standing Tackle" xml:space="preserve">
     <value>Боротьба</value>
   </data>
   <data name="Strength" xml:space="preserve">
@@ -272,5 +272,113 @@
   </data>
   <data name="Volleys" xml:space="preserve">
     <value>Залпи</value>
+  </data>
+  <data name="Blue" xml:space="preserve">
+    <value>Синій</value>
+  </data>
+  <data name="Pink" xml:space="preserve">
+    <value>Рожева</value>
+  </data>
+  <data name="Black" xml:space="preserve">
+    <value>Чорна</value>
+  </data>
+  <data name="Red" xml:space="preserve">
+    <value>Червона</value>
+  </data>
+  <data name="Purple" xml:space="preserve">
+    <value>Фіолетова</value>
+  </data>
+  <data name="Orange" xml:space="preserve">
+    <value>Помаранчева</value>
+  </data>
+  <data name="Brown" xml:space="preserve">
+    <value>Коричнева</value>
+  </data>
+  <data name="Green" xml:space="preserve">
+    <value>Зелена</value>
+  </data>
+  <data name="GK" xml:space="preserve">
+    <value>ВРТ</value>
+  </data>
+  <data name="LB" xml:space="preserve">
+    <value>ЛЗ</value>
+  </data>
+  <data name="RB" xml:space="preserve">
+    <value>ПЗ</value>
+  </data>
+  <data name="CB" xml:space="preserve">
+    <value>ЦЗ</value>
+  </data>
+  <data name="LWB" xml:space="preserve">
+    <value>ЛФЗ</value>
+  </data>
+  <data name="RWB" xml:space="preserve">
+    <value>ПФЗ</value>
+  </data>
+  <data name="LM" xml:space="preserve">
+    <value>ЛП</value>
+  </data>
+  <data name="RM" xml:space="preserve">
+    <value>ПП</value>
+  </data>
+  <data name="CM" xml:space="preserve">
+    <value>ЦП</value>
+  </data>
+  <data name="CDM" xml:space="preserve">
+    <value>ЦОП</value>
+  </data>
+  <data name="CAM" xml:space="preserve">
+    <value>ЦАП</value>
+  </data>
+  <data name="LF" xml:space="preserve">
+    <value>ЛФ</value>
+  </data>
+  <data name="RF" xml:space="preserve">
+    <value>ПФ</value>
+  </data>
+  <data name="CF" xml:space="preserve">
+    <value>ЦФ</value>
+  </data>
+  <data name="ST" xml:space="preserve">
+    <value>ФРВ</value>
+  </data>
+  <data name="LW" xml:space="preserve">
+    <value>ЛВ</value>
+  </data>
+  <data name="RW" xml:space="preserve">
+    <value>ПВ</value>
+  </data>
+  <data name="Formation" xml:space="preserve">
+    <value>Схема</value>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Вручну</value>
+  </data>
+  <data name="Powerfull attacking formation" xml:space="preserve">
+    <value>Потужне атакуюче формування</value>
+  </data>
+  <data name="Control formation" xml:space="preserve">
+    <value>Схема контролю</value>
+  </data>
+  <data name="Defend formation" xml:space="preserve">
+    <value>Захисна схема</value>
+  </data>
+  <data name="Atacking formation" xml:space="preserve">
+    <value>Атакуюча схема</value>
+  </data>
+  <data name="Balanced formation" xml:space="preserve">
+    <value>Збалансована схема</value>
+  </data>
+  <data name="Box to box" xml:space="preserve">
+    <value>Коробка до коробки</value>
+  </data>
+  <data name="With fake number nine" xml:space="preserve">
+    <value>З фальшивим дев'ятим номером</value>
+  </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>Валідаційна помилка.</value>
+  </data>
+  <data name="Yellow" xml:space="preserve">
+    <value>Жовтий</value>
   </data>
 </root>

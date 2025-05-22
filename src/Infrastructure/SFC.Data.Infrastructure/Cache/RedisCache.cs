@@ -3,8 +3,8 @@
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
 
+using SFC.Data.Application.Common.Settings;
 using SFC.Data.Application.Interfaces.Cache;
-using SFC.Data.Application.Settings;
 
 namespace SFC.Data.Infrastructure.Cache;
 public class RedisCache : ICache
@@ -30,13 +30,13 @@ public class RedisCache : ICache
 
     public async Task<bool> ExistsAsync(string key, CancellationToken token = default)
     {
-        string? json = await _cache.GetStringAsync(key, token);
+        string? json = await _cache.GetStringAsync(key, token).ConfigureAwait(true);
         return json is not null;
     }
 
     public async Task<T?> GetAsync<T>(string key, CancellationToken token = default)
     {
-        string? json = await _cache.GetStringAsync(key, token);
+        string? json = await _cache.GetStringAsync(key, token).ConfigureAwait(true);
         return json is null ? default! : JsonSerializer.Deserialize<T?>(json)!;
     }
 

@@ -1,7 +1,7 @@
-﻿namespace SFC.Data.Application.Settings;
+﻿namespace SFC.Data.Application.Common.Settings;
 public class CacheSettings
 {
-    public const string SECTION_KEY = "Cache";
+    public const string SectionKey = "Cache";
 
     public bool Enabled { get; set; }
 

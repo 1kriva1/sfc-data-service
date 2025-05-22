@@ -1,93 +1,93 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using SFC.Data.Application.Interfaces.Common;
-using SFC.Data.Domain.Common;
-using SFC.Data.Domain.Entities;
+using SFC.Data.Domain.Entities.Data;
+using SFC.Data.Infrastructure.Persistence.Extensions;
 
-namespace SFC.Data.Infrastructure.Persistence.Seeds.Data;
+namespace SFC.Data.Infrastructure.Persistence.Seeds;
 public static class DataSeed
 {
-    public static void Seed(this ModelBuilder builder, IDateTimeService dateTimeService)
+    public static void SeedData(this ModelBuilder builder, IDateTimeService dateTimeService)
     {
-        List<BaseDataEntity> footballPositions = new() {
-            new FootballPosition { Id = 0, Title = "Goalkeeper" },
-            new FootballPosition { Id = 1, Title = "Defender" },
-            new FootballPosition { Id = 2, Title = "Midfielder" },
-            new FootballPosition { Id = 3, Title = "Forward" }
-        };
-        footballPositions.ForEach(t => t.CreatedDate = dateTimeService.Now);
-        builder.Entity<FootballPosition>().HasData(footballPositions);
+        builder.SeedDataEnumValues<FootballPosition, FootballPositionEnum>(@enum => new FootballPosition(@enum).SetCreatedDate(dateTimeService));
 
-        List<BaseDataEntity> gameStyles = new() {
-            new GameStyle { Id = 0, Title = "Defend" },
-            new GameStyle { Id = 1, Title = "Attacking" },
-            new GameStyle { Id = 2, Title = "Aggressive" },
-            new GameStyle { Id = 3, Title = "Control" },
-            new GameStyle { Id = 4, Title = "CounterAttacks" }
-        };
-        gameStyles.ForEach(t => t.CreatedDate = dateTimeService.Now);
-        builder.Entity<GameStyle>().HasData(gameStyles);
+        builder.SeedDataEnumValues<GameStyle, GameStyleEnum>(@enum => new GameStyle(@enum).SetCreatedDate(dateTimeService));
 
-        List<BaseDataEntity> workingFoots = new() {
-            new WorkingFoot { Id = 0, Title = "Right" },
-            new WorkingFoot { Id = 1, Title = "Left" },
-            new WorkingFoot { Id = 2, Title = "Both" }
-        };
-        workingFoots.ForEach(t => t.CreatedDate = dateTimeService.Now);
-        builder.Entity<WorkingFoot>().HasData(workingFoots);
+        builder.SeedDataEnumValues<WorkingFoot, WorkingFootEnum>(@enum => new WorkingFoot(@enum).SetCreatedDate(dateTimeService));
 
-        List<BaseDataEntity> statCategories = new() {
-            new StatCategory { Id = 0, Title = "Pace" },
-            new StatCategory { Id = 1, Title = "Shooting" },
-            new StatCategory { Id = 2, Title = "Passing" },
-            new StatCategory { Id = 3, Title = "Dribbling" },
-            new StatCategory { Id = 4, Title = "Defending" },
-            new StatCategory { Id = 5, Title = "Physicality" }
-        };
-        statCategories.ForEach(t => t.CreatedDate = dateTimeService.Now);
-        builder.Entity<StatCategory>().HasData(statCategories);
+        builder.SeedDataEnumValues<StatCategory, StatCategoryEnum>(@enum => new StatCategory(@enum).SetCreatedDate(dateTimeService));
 
-        List<BaseDataEntity> statSkills = new() {
-            new StatSkill { Id = 0, Title = "Physical" },
-            new StatSkill { Id = 1, Title = "Mental" },
-            new StatSkill { Id = 2, Title = "Skill" }
-        };
-        statSkills.ForEach(t => t.CreatedDate = dateTimeService.Now);
-        builder.Entity<StatSkill>().HasData(statSkills);
+        builder.SeedDataEnumValues<StatSkill, StatSkillEnum>(@enum => new StatSkill(@enum).SetCreatedDate(dateTimeService));
 
-        List<BaseDataEntity> statTypes = new()
+        builder.SeedDataEnumValues<StatType, StatTypeEnum>(@enum => ConvertStatType(@enum).SetCreatedDate(dateTimeService));
+
+        builder.SeedDataEnumValues<Shirt, ShirtEnum>(@enum => new Shirt(@enum).SetCreatedDate(dateTimeService));
+    }
+
+    private static StatType ConvertStatType(StatTypeEnum @enum)
+    {
+        StatType type = new(@enum);
+
+        switch (type.Id)
         {
-            new StatType { Id = 0, Title = "Acceleration", CategoryId = 0, SkillId = 0 },
-            new StatType { Id = 1, Title = "SprintSpeed", CategoryId = 0, SkillId = 0 },
-            new StatType { Id = 2, Title = "Positioning", CategoryId = 1, SkillId = 2 },
-            new StatType { Id = 3, Title = "Finishing", CategoryId = 1, SkillId = 2 },
-            new StatType { Id = 4, Title = "ShotPower", CategoryId = 1, SkillId = 2 },
-            new StatType { Id = 5, Title = "LongShots", CategoryId = 1, SkillId = 2 },
-            new StatType { Id = 6, Title = "Volleys", CategoryId = 1, SkillId = 2 },
-            new StatType { Id = 7, Title = "Penalties", CategoryId = 1, SkillId = 2 },
-            new StatType { Id = 8, Title = "Vision", CategoryId = 2, SkillId = 2 },
-            new StatType { Id = 9, Title = "Crossing", CategoryId = 2, SkillId = 2 },
-            new StatType { Id = 10, Title = "FkAccuracy", CategoryId = 2, SkillId = 2 },
-            new StatType { Id = 11, Title = "ShortPassing", CategoryId = 2, SkillId = 2 },
-            new StatType { Id = 12, Title = "LongPassing", CategoryId = 2, SkillId = 2 },
-            new StatType { Id = 13, Title = "Curve", CategoryId = 2, SkillId = 2 },
-            new StatType { Id = 14, Title = "Agility", CategoryId = 3, SkillId = 0 },
-            new StatType { Id = 15, Title = "Balance", CategoryId = 3, SkillId = 0},
-            new StatType { Id = 16, Title = "Reactions", CategoryId = 3, SkillId = 0 },
-            new StatType { Id = 17, Title = "BallControl", CategoryId = 3, SkillId = 2 },
-            new StatType { Id = 18, Title = "Dribbling", CategoryId = 3, SkillId = 2 },
-            new StatType { Id = 19, Title = "Composure", CategoryId = 3, SkillId = 1 },
-            new StatType { Id = 20, Title = "Interceptions", CategoryId = 4, SkillId = 2},
-            new StatType { Id = 21, Title = "HeadingAccuracy", CategoryId = 4, SkillId = 2 },
-            new StatType { Id = 22, Title = "DefAwarenence", CategoryId = 4, SkillId = 2 },
-            new StatType { Id = 23, Title = "StandingTackle", CategoryId = 4, SkillId = 2 },
-            new StatType { Id = 24, Title = "SlidingTackle", CategoryId = 4, SkillId = 2 },
-            new StatType { Id = 25, Title = "Jumping", CategoryId = 5, SkillId = 0 },
-            new StatType { Id = 26, Title = "Stamina", CategoryId = 5, SkillId = 0 },
-            new StatType { Id = 27, Title = "Strength", CategoryId = 5, SkillId = 0 },
-            new StatType { Id = 28, Title = "Aggression", CategoryId = 5, SkillId = 1 }
-        };
-        statTypes.ForEach(t => t.CreatedDate = dateTimeService.Now);
-        builder.Entity<StatType>().HasData(statTypes);
+            case StatTypeEnum.Acceleration:
+            case StatTypeEnum.SprintSpeed:
+                type.CategoryId = StatCategoryEnum.Pace;
+                type.SkillId = StatSkillEnum.Physical;
+                break;
+            case StatTypeEnum.Positioning:
+            case StatTypeEnum.Finishing:
+            case StatTypeEnum.ShotPower:
+            case StatTypeEnum.LongShots:
+            case StatTypeEnum.Volleys:
+            case StatTypeEnum.Penalties:
+                type.CategoryId = StatCategoryEnum.Shooting;
+                type.SkillId = StatSkillEnum.Skill;
+                break;
+            case StatTypeEnum.Vision:
+            case StatTypeEnum.Crossing:
+            case StatTypeEnum.FkAccuracy:
+            case StatTypeEnum.ShortPassing:
+            case StatTypeEnum.LongPassing:
+            case StatTypeEnum.Curve:
+                type.CategoryId = StatCategoryEnum.Passing;
+                type.SkillId = StatSkillEnum.Skill;
+                break;
+            case StatTypeEnum.Agility:
+            case StatTypeEnum.Balance:
+            case StatTypeEnum.Reactions:
+                type.CategoryId = StatCategoryEnum.Dribbling;
+                type.SkillId = StatSkillEnum.Physical;
+                break;
+            case StatTypeEnum.BallControl:
+            case StatTypeEnum.Dribbling:
+                type.CategoryId = StatCategoryEnum.Dribbling;
+                type.SkillId = StatSkillEnum.Skill;
+                break;
+            case StatTypeEnum.Composure:
+                type.CategoryId = StatCategoryEnum.Dribbling;
+                type.SkillId = StatSkillEnum.Mental;
+                break;
+            case StatTypeEnum.Interceptions:
+            case StatTypeEnum.HeadingAccuracy:
+            case StatTypeEnum.DefAwarenence:
+            case StatTypeEnum.StandingTackle:
+            case StatTypeEnum.SlidingTackle:
+                type.CategoryId = StatCategoryEnum.Defending;
+                type.SkillId = StatSkillEnum.Skill;
+                break;
+            case StatTypeEnum.Jumping:
+            case StatTypeEnum.Stamina:
+            case StatTypeEnum.Strength:
+                type.CategoryId = StatCategoryEnum.Physicality;
+                type.SkillId = StatSkillEnum.Physical;
+                break;
+            case StatTypeEnum.Aggression:
+                type.CategoryId = StatCategoryEnum.Physicality;
+                type.SkillId = StatSkillEnum.Mental;
+                break;
+        }
+
+        return type;
     }
 }
