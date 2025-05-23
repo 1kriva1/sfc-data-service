@@ -1,12 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
+using SFC.Data.Domain.Common.Interfaces;
+
 namespace SFC.Data.Domain.Common;
 
-public abstract class BaseEntity
+public abstract class BaseEntity<TID> : IEntity
 {
-    public int Id { get; set; }
+    public TID Id { get; set; } = default!;
 
-    private readonly List<BaseEvent> _domainEvents = new();
+    private readonly List<BaseEvent> _domainEvents = [];
 
     [NotMapped]
     public IReadOnlyCollection<BaseEvent> DomainEvents => _domainEvents.AsReadOnly();

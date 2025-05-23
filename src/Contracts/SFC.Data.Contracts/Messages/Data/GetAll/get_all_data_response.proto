@@ -1,0 +1,19 @@
+﻿syntax = "proto3";
+
+package sfc_data;
+
+option csharp_namespace = "SFC.Data.Contracts.Messages.Data.GetAll";
+
+import "Models/Data/data_value.proto";
+import "Models/Data/stat_type_data_value.proto";
+
+message GetAllDataResponse
+{
+    repeated DataValue football_positions = 1;
+    repeated DataValue game_styles = 2;
+    repeated DataValue stat_categories = 3;
+    repeated DataValue stat_skills = 4;
+    repeated StatTypeDataValue stat_types = 5;
+    repeated DataValue working_foots = 6;
+    repeated DataValue shirts = 7;
+}

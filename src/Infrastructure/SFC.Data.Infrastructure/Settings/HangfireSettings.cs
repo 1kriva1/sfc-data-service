@@ -1,7 +1,7 @@
 ﻿namespace SFC.Data.Infrastructure.Settings;
 public class HangfireSettings
 {
-    public const string SECTION_KEY = "Hangfire";
+    public const string SectionKey = "Hangfire";
 
     public string SchemaNamePrefix { get; set; } = null!;
 
@@ -14,7 +14,9 @@ public class HangfireAutomaticRetrySettings
 {
     public int Attempts { get; set; }
 
-    public int[] DelaysInSeconds { get; set; } = Array.Empty<int>();
+#pragma warning disable CA1819 // Properties should not return arrays
+    public int[] DelaysInSeconds { get; set; } = [];
+#pragma warning restore CA1819 // Properties should not return arrays
 }
 
 public class HangfireDashboardSettings

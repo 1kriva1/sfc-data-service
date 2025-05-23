@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using SFC.Data.Application.Interfaces.Persistence;
+using SFC.Data.Application.Interfaces.Persistence.Context;
+using SFC.Data.Infrastructure.Persistence.Contexts;
 using SFC.Data.Infrastructure.Persistence.Extensions;
 using SFC.Data.Infrastructure.Persistence.Interceptors;
 
@@ -13,10 +12,18 @@ public static class PersistenceRegistration
 {
     public static void AddPersistenceServices(this WebApplicationBuilder builder)
     {
-        builder.Services.AddDbContext<DataDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database"),
-            b => b.MigrationsAssembly(typeof(DataDbContext).Assembly.FullName)));
+        // contexts
+        builder.Services.AddDbContext<MetadataDbContext>(builder.Configuration, builder.Environment);
+        builder.Services.AddDbContext<DataDbContext>(builder.Configuration, builder.Environment);
+
+        // interceptors        
+        builder.Services.AddScoped<DispatchDomainEventsSaveChangesInterceptor>();
         builder.Services.AddScoped<DataEntitySaveChangesInterceptor>();
+
+        // contexts by interfaces
         builder.Services.AddScoped<IDataDbContext, DataDbContext>();
+
+        // repositories
         builder.Services.AddRepositories(builder.Configuration);
     }
 }

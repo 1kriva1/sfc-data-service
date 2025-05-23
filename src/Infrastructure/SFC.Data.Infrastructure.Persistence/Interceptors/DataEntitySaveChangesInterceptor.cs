@@ -1,19 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 using SFC.Data.Application.Interfaces.Common;
-using SFC.Data.Domain.Common;
-using SFC.Data.Infrastructure.Persistence.Extensions;
+using SFC.Data.Domain.Common.Interfaces;
 
 namespace SFC.Data.Infrastructure.Persistence.Interceptors;
-public class DataEntitySaveChangesInterceptor : SaveChangesInterceptor
+public class DataEntitySaveChangesInterceptor(IDateTimeService dateTimeService) : SaveChangesInterceptor
 {
-    private readonly IDateTimeService _dateTimeService;
-
-    public DataEntitySaveChangesInterceptor(IDateTimeService dateTimeService)
-    {
-        _dateTimeService = dateTimeService;
-    }
+    private readonly IDateTimeService _dateTimeService = dateTimeService;
 
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
     {
@@ -34,6 +29,14 @@ public class DataEntitySaveChangesInterceptor : SaveChangesInterceptor
     {
         if (context == null) return;
 
-        context.ChangeTracker.Entries<BaseDataEntity>().SetAuditable(_dateTimeService);
+        IEnumerable<EntityEntry<IDataEntity>> entries = context.ChangeTracker.Entries<IDataEntity>();
+
+        foreach (EntityEntry<IDataEntity> entry in entries)
+        {
+            if (entry.State == EntityState.Added)
+            {
+                entry.Entity.CreatedDate = _dateTimeService.Now;
+            }
+        }
     }
 }

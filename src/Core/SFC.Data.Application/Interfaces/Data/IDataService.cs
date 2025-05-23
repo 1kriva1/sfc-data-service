@@ -1,10 +1,17 @@
-﻿using SFC.Data.Application.Features.Common.Models;
-using SFC.Data.Messages.Enums;
+﻿using SFC.Data.Application.Interfaces.Data.Models;
 
 namespace SFC.Data.Application.Interfaces.Data;
 public interface IDataService
 {
-    Task InitAsync(DataInitiator initiator);
+    Task<GetAllDataModel> GetAllDataAsync();
 
-    Task<DataModel> GetAsync();
+    Task<GetPlayerDataModel> GetPlayerDataAsync();
+
+    Task<GetTeamDataModel> GetTeamDataAsync();
+
+    Task<GetInviteDataModel> GetInviteDataAsync();
+
+    Task<GetRequestDataModel> GetRequestDataAsync();
+
+    Task<GetSchemeDataModel> GetSchemeDataAsync();
 }

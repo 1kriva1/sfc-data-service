@@ -1,8 +1,9 @@
 ﻿using System.Data.Common;
 
-using MassTransit;
 using Hangfire;
 using Hangfire.MemoryStorage;
+
+using MassTransit;
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -10,9 +11,8 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-using SFC.Data.Infrastructure.Persistence;
-using SFC.Players.Infrastructure.Consumers;
-using SFC.Data.Application.Common.Constants;
+using SFC.Data.Infrastructure.Consumers.Player;
+using SFC.Data.Infrastructure.Persistence.Contexts;
 
 namespace SFC.Data.Api.IntegrationTests.Fixtures;
 public class CustomWebApplicationFactory<TStartup>
@@ -39,7 +39,7 @@ public class CustomWebApplicationFactory<TStartup>
             // switch db context connection to sqllite db
             services.AddDbContext<DataDbContext>(SwitchToSqliteConnection);
 
-            services.AddMassTransitTestHarness(configure => configure.AddConsumer<DataRequireMessageConsumer>());
+            services.AddMassTransitTestHarness(configure => configure.AddConsumer<RequireDataConsumer>());
 
             services.AddHangfire(x => x.UseMemoryStorage());
         });

@@ -6,7 +6,7 @@ using Hangfire.States;
 using Hangfire.Storage;
 
 namespace SFC.Data.Infrastructure.Filters.Hangfire;
-public class LogJobAttribute : JobFilterAttribute, IClientFilter, IServerFilter, IApplyStateFilter
+public sealed class LogJobAttribute : JobFilterAttribute, IClientFilter, IServerFilter, IApplyStateFilter
 {
     private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
 
@@ -38,7 +38,7 @@ public class LogJobAttribute : JobFilterAttribute, IClientFilter, IServerFilter,
         if (context.NewState is FailedState failedState)
         {
             Logger.ErrorException(
-                String.Format("Background job #{0} was failed with an exception.", context.BackgroundJob.Id),
+                $"Background job #{context.BackgroundJob.Id} was failed with an exception.",
                 failedState.Exception);
         }
     }

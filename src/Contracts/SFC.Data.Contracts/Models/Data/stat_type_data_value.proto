@@ -1,0 +1,13 @@
+﻿syntax = "proto3";
+
+package sfc_data;
+
+option csharp_namespace = "SFC.Data.Contracts.Models.Data";
+
+message StatTypeDataValue
+{
+    int32 id = 1;
+    string title = 2;
+    int32 category = 3;
+    int32 skill = 4;
+}

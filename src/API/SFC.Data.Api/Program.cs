@@ -1,4 +1,4 @@
-using SFC.Data.Api.Extensions;
+using SFC.Data.Api.Infrastructure.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

@@ -1,21 +1,32 @@
-﻿using MassTransit;
+﻿using System.Reflection;
+
+using Hangfire;
+
+using MassTransit;
+
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 using SFC.Data.Application.Interfaces.Common;
-using SFC.Data.Infrastructure.Services;
-using SFC.Data.Infrastructure.Extensions;
 using SFC.Data.Application.Interfaces.Data;
+using SFC.Data.Application.Interfaces.Identity;
+using SFC.Data.Application.Interfaces.Metadata;
+using SFC.Data.Infrastructure.Extensions;
+using SFC.Data.Infrastructure.Services.Common;
+using SFC.Data.Infrastructure.Services.Data;
 using SFC.Data.Infrastructure.Services.Hosted;
-using Microsoft.AspNetCore.Builder;
-using Hangfire;
-using Microsoft.Extensions.Configuration;
-using Hangfire.SqlServer;
+using SFC.Data.Infrastructure.Services.Identity;
+using SFC.Data.Infrastructure.Services.Metadata;
 
 namespace SFC.Data.Infrastructure;
 public static class InfrastructureRegistration
 {
     public static void AddInfrastructureServices(this WebApplicationBuilder builder)
     {
+        builder.Services.AddHttpContextAccessor();
+
+        builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
         builder.Services.AddHangfire(builder.Configuration);
 
         builder.Services.AddRedis(builder.Configuration);
@@ -24,17 +35,17 @@ public static class InfrastructureRegistration
 
         builder.Services.AddCache(builder.Configuration);
 
+        builder.Services.AddGrpc(builder.Configuration, builder.Environment);
+
         // custom services
+        builder.Services.AddTransient<IMetadataService, MetadataService>();
         builder.Services.AddTransient<IDateTimeService, DateTimeService>();
         builder.Services.AddTransient<IDataService, DataService>();
+        builder.Services.AddTransient<IUserService, UserService>();
 
         // hosted services
         builder.Services.AddHostedService<DatabaseResetHostedService>();
         builder.Services.AddHostedService<JobsInitializationHostedService>();
-
-        if (builder.Configuration.StartDataInitialization())
-        {
-            builder.Services.AddHostedService<DataInitializationHostedService>();
-        }
+        builder.Services.AddHostedService<DataInitializationHostedService>();
     }
 }

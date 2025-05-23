@@ -1,17 +1,10 @@
-﻿using AutoMapper;
-
-using SFC.Data.Application.Common.Extensions;
-using SFC.Data.Application.Common.Mappings;
-using SFC.Data.Domain.Entities;
+﻿using SFC.Data.Application.Common.Mappings.Interfaces;
+using SFC.Data.Domain.Entities.Data;
 
 namespace SFC.Data.Application.Features.Data.Queries.GetAll.Dto;
 public class StatTypeDataValueDto : DataValueDto, IMapFrom<StatType>
 {
-    public int Category { get; set; }
+    public int CategoryId { get; set; }
 
-    public int Skill { get; set; }
-
-    public void Mapping(Profile profile) => profile.CreateMap<StatType, StatTypeDataValueDto>()
-                                                   .ForMember(p => p.Category, d => d.MapFrom(z => z.CategoryId))
-                                                   .ForMember(p => p.Skill, d => d.MapFrom(z => z.SkillId));
+    public int SkillId { get; set; }
 }
