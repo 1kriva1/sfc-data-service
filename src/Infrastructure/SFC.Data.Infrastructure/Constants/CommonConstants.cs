@@ -6,5 +6,7 @@ public static class CommonConstants
 
     public static readonly string[] SupportedCultures = { "en-GB", "uk-UA" };
 
-    public const string ContentType = "application/json";
+    public const string JsonContentType = "application/json";
+
+    public const string GrpcContentType = "application/grpc";
 }

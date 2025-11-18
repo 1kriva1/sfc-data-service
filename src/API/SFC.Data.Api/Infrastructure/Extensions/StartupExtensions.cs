@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+
 using SFC.Data.Application;
-using SFC.Data.Infrastructure.Persistence;
 using SFC.Data.Infrastructure;
 using SFC.Data.Infrastructure.Extensions;
+using SFC.Data.Infrastructure.Persistence;
 
 namespace SFC.Data.Api.Infrastructure.Extensions;
 
@@ -28,6 +29,8 @@ public static class StartupExtensions
         {
             builder.Services.AddSwagger();
         }
+
+        builder.Services.AddHealthChecks();
 
         return builder.Build();
     }
@@ -57,6 +60,8 @@ public static class StartupExtensions
         app.UseCustomExceptionHandler();
 
         app.UseHangfireDashboard();
+
+        app.MapHealthChecks("/health");
 
         app.MapControllers();
 
