@@ -12,7 +12,7 @@
       "name": "dotnet-test",
       "group": "pre-push-operations",
       "command": "dotnet",
-      "args": [ "test", "--no-restore", "--no-build", "/p:CollectCoverage=true", "/p:CoverletOutput=../coverage/code_coverage", "/p:CoverletOutputFormat=opencover", "/p:Threshold=0", "/p:ThresholdStat=total" ]
+      "args": [ "test", "SFC.Data.sln", "--no-restore", "--no-build", "/p:CollectCoverage=true", "/p:CoverletOutput=../coverage/code_coverage", "/p:CoverletOutputFormat=opencover", "/p:Threshold=0", "/p:ThresholdStat=total" ]
     },
     {
       "name": "reportgenerator-create",
