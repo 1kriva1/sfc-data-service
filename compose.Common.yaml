@@ -1,0 +1,51 @@
+﻿name: sfc-data
+include:
+   - compose.Infrastructure.yaml
+x-root-certificate-volume: &root-certificate-volume
+  type: bind
+  source: ../../Configurations/certificates/root/sfcRootCA.crt
+  target: /usr/local/share/ca-certificates/sfcRootCA.crt
+x-common-deploy: &common_deploy
+  deploy:
+    replicas: 1
+    restart_policy:
+      condition: on-failure
+      delay: 5s
+      max_attempts: 3
+      window: 120s
+services:
+  sfc-data:
+    container_name: sfc-data
+    build:
+      context: .
+      args:
+        HTTP_PORT: 7465
+        HTTPS_PORT: 7466
+    ports:
+      - "7466:7466"
+      - "7465:7465"
+    healthcheck:
+          test: ["CMD", "curl", "--fail", "http://localhost:7465/health"] 
+          interval: 20s
+          timeout: 10s
+          retries: 3
+          start_period: 60s
+    volumes:
+      - *root-certificate-volume
+      - type: bind
+        source: ../../Configurations/certificates/sfc-data/sfc-data.pfx
+        target: /https/sfc-data.pfx
+    networks:
+      - sfc-network
+    <<: *common_deploy
+    depends_on:
+      sfc-mssql:
+        condition: service_healthy
+        restart: true
+      sfc-redis:
+        condition: service_healthy
+        restart: true
+      sfc-rabbitmq:
+        condition: service_healthy
+        restart: true
+  

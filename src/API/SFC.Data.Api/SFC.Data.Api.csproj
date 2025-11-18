@@ -5,7 +5,14 @@
     <DocumentationFile>SFC.Data.Api.xml</DocumentationFile>
     <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
     <UserSecretsId>b92e659d-50ec-4eb0-b9db-2db0444f02f3</UserSecretsId>
-    <HUSKY>True</HUSKY>
+    <HUSKY>False</HUSKY>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DockerfileFile>Dockerfile</DockerfileFile>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..</DockerfileContext>
+    <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -24,6 +31,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
@@ -31,6 +39,23 @@
     <ProjectReference Include="..\..\Core\SFC.Data.Application\SFC.Data.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\SFC.Data.Infrastructure\SFC.Data.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\SFC.Data.Infrastructure.Persistence\SFC.Data.Infrastructure.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="entrypoint.sh">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="entrypoint.Common.sh">
+      <DependentUpon>entrypoint.sh</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="entrypoint.Development.sh">
+      <DependentUpon>entrypoint.sh</DependentUpon>
+    </None>
+    <None Include="entrypoint.sh" />
   </ItemGroup>
 
   <Target Name="Husky" BeforeTargets="Restore;CollectPackageReferences" Condition="'$(HUSKY)' == True">

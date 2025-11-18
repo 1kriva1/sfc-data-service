@@ -5,8 +5,6 @@ public class CacheSettings
 
     public bool Enabled { get; set; }
 
-    public string InstanceName { get; set; } = default!;
-
     public RefreshCacheSettings Refresh { get; set; } = default!;
 
     public int AbsoluteExpirationInMinutes { get; set; }

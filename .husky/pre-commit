@@ -9,6 +9,6 @@ dotnet husky run --name dotnet-format-staged-files
 
 echo 'Build'
 
-dotnet build --no-restore --configuration Release
+dotnet build SFC.Data.sln --no-restore --configuration Release
 
 echo 'Completed pre-commit changes'
