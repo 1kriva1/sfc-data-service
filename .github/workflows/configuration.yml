@@ -1,4 +1,4 @@
-#github action to build and test SFC.Data application
+#github action to build, test and push SFC.Data application
 
 name: Build, Test and Push SFC.Data Application
 
@@ -27,13 +27,13 @@ jobs:
       - name: Verify Redis
         run: redis-cli ping
 
-      - name: Restore dependencies
+      - name: Dotnet Restore Dependencies
         run: dotnet restore SFC.Data.sln
 
-      - name: Build
+      - name: Dotnet Build
         run: dotnet build SFC.Data.sln --no-restore --configuration Release
 
-      - name: Test
+      - name: Dotnet Test
         run: dotnet test SFC.Data.sln --no-restore --no-build --configuration Release --verbosity normal /p:CollectCoverage=true /p:Threshold=0 /p:ThresholdStat=total
       
       - name: Log in to Docker Hub

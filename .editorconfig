@@ -372,4 +372,6 @@ dotnet_style_namespace_match_folder = true:suggestion
 dotnet_diagnostic.CA1062.severity = none
 dotnet_diagnostic.CA1724.severity = none
 dotnet_diagnostic.CA1861.severity = none
+dotnet_diagnostic.CA2263.severity = none
+dotnet_diagnostic.CA1515.severity = none
 
