@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using SFC.Data.Application.Common.Settings;
 using SFC.Data.Infrastructure.Settings;
 
 using StackExchange.Redis;

@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sfc-data
+  namespace: sfc
+  labels:
+    app.kubernetes.io/name: sfc-data
+    app.kubernetes.io/component: network
+    app.kubernetes.io/part-of: sfc
+    app.kubernetes.io/instance: production
+    app.kubernetes.io/managed-by: kubectl
+  annotations:
+    owner: "krivorukandrey@gmail.com"
+    purpose: "Internal ClusterIP service for Data component in SFC application"
+spec:
+  selector:
+    app.kubernetes.io/name: sfc-data
+  type: ClusterIP
+  ports:
+    - name: sfc-data-cluster-service-http-port
+      port: 7465
+      targetPort: 7465
+      protocol: TCP
+    - name: sfc-data-cluster-service-https-port
+      protocol: TCP
+      port: 7466
+      targetPort: 7466    
+  internalTrafficPolicy: Cluster
