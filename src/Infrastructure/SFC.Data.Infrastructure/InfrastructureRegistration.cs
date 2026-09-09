@@ -25,7 +25,7 @@ public static class InfrastructureRegistration
     {
         builder.Services.AddHttpContextAccessor();
 
-        builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        builder.Services.AddAutoMapper(config => { }, Assembly.GetExecutingAssembly());
 
         builder.Services.AddHangfire(builder.Configuration);
 

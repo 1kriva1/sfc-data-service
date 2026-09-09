@@ -12,7 +12,9 @@
         "ConnectionStrings__Database": "Server=127.0.0.1,1433;Database=Data;User Id=sfc;Password=Test1234!;TrustServerCertificate=True;",
         "ConnectionStrings__Hangfire": "Server=127.0.0.1,1433;Database=Hangfire;User Id=sfc;Password=Test1234!;TrustServerCertificate=True;",
         "ConnectionStrings__RabbitMq": "rabbitmq://localhost:5672",
-        "ConnectionStrings__Redis": "localhost:6379"
+        "ConnectionStrings__Redis": "localhost:6379",
+        "Kestrel__Certificates__Default__Path": "C:/SFC/Configurations/certificates/sfc-data/sfc-data.pfx",
+        "Kestrel__Certificates__Default__Password": "Test1234!"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7466;http://localhost:7465",

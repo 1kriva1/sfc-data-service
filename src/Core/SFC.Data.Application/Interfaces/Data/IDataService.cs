@@ -14,4 +14,6 @@ public interface IDataService
     Task<GetRequestDataModel> GetRequestDataAsync();
 
     Task<GetSchemeDataModel> GetSchemeDataAsync();
+
+    Task<GetGameDataModel> GetGameDataAsync();
 }

@@ -36,6 +36,9 @@ public class MappingProfile : BaseMappingProfile
         // scheme messages
         CreateMapSchemeMessages();
 
+        // game messages
+        CreateMapGameMessages();
+
         #endregion Complex types
     }
 
@@ -127,4 +130,19 @@ public class MappingProfile : BaseMappingProfile
     }
 
     #endregion Scheme
+
+    #region Game
+
+    private void CreateMapGameMessages()
+    {
+        CreateMap<Shirt, SFC.Game.Messages.Models.Data.DataValue>();
+        CreateMap<FootballPosition, SFC.Game.Messages.Models.Data.DataValue>();
+        CreateMap<GameStyle, SFC.Game.Messages.Models.Data.DataValue>();
+        CreateMap<StatCategory, SFC.Game.Messages.Models.Data.DataValue>();
+        CreateMap<StatSkill, SFC.Game.Messages.Models.Data.DataValue>();
+        CreateMap<StatType, SFC.Game.Messages.Models.Data.StatTypeDataValue>();
+        CreateMap<WorkingFoot, SFC.Game.Messages.Models.Data.DataValue>();
+    }
+
+    #endregion Game
 }

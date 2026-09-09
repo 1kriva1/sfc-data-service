@@ -72,6 +72,9 @@ public static class MassTransitExtensions
 
         // "sfc.scheme.data.init"
         EndpointConvention.Map<SFC.Scheme.Messages.Commands.Data.InitializeData>(exchangesSettings.Scheme.Value.Data.Initialize.GetExchangeEndpointUri());
+
+        // "sfc.scheme.data.init"
+        EndpointConvention.Map<SFC.Game.Messages.Commands.Data.InitializeData>(exchangesSettings.Game.Value.Data.Initialize.GetExchangeEndpointUri());
     }
 
     private static void AddExchange<T>(this IRabbitMqBusFactoryConfigurator configure, Exchange exchange) where T : class

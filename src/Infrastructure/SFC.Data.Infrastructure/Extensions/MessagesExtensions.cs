@@ -4,6 +4,9 @@ using SFC.Data.Application.Interfaces.Data.Models;
 using SFC.Data.Messages.Events.Data;
 using SFC.Data.Messages.Models.Data;
 
+using GameDataValue = SFC.Game.Messages.Models.Data.DataValue;
+using GameInitializeData = SFC.Game.Messages.Commands.Data.InitializeData;
+using GameStatTypeDataValue = SFC.Game.Messages.Models.Data.StatTypeDataValue;
 using InviteDataValue = SFC.Invite.Messages.Models.Data.DataValue;
 using InviteInitializeData = SFC.Invite.Messages.Commands.Data.InitializeData;
 using InviteStatTypeDataValue = SFC.Invite.Messages.Models.Data.StatTypeDataValue;
@@ -113,6 +116,22 @@ public static class MessagesExtensions
             StatTypes = mapper.Map<IEnumerable<SchemeStatTypeDataValue>>(model.StatTypes),
             WorkingFoots = mapper.Map<IEnumerable<SchemeDataValue>>(model.WorkingFoots),
             Shirts = mapper.Map<IEnumerable<SchemeDataValue>>(model.Shirts)
+        };
+
+        return message;
+    }
+
+    public static GameInitializeData BuildGameInitializeDataCommand(this IMapper mapper, GetGameDataModel model)
+    {
+        GameInitializeData message = new()
+        {
+            FootballPositions = mapper.Map<IEnumerable<GameDataValue>>(model.FootballPositions),
+            GameStyles = mapper.Map<IEnumerable<GameDataValue>>(model.GameStyles),
+            StatCategories = mapper.Map<IEnumerable<GameDataValue>>(model.StatCategories),
+            StatSkills = mapper.Map<IEnumerable<GameDataValue>>(model.StatSkills),
+            StatTypes = mapper.Map<IEnumerable<GameStatTypeDataValue>>(model.StatTypes),
+            WorkingFoots = mapper.Map<IEnumerable<GameDataValue>>(model.WorkingFoots),
+            Shirts = mapper.Map<IEnumerable<GameDataValue>>(model.Shirts)
         };
 
         return message;
