@@ -102,4 +102,18 @@ public class DataService(
             Shirts = await _shirtsRepository.ListAllAsync().ConfigureAwait(true)
         };
     }
+
+    public async Task<GetGameDataModel> GetGameDataAsync()
+    {
+        return new()
+        {
+            FootballPositions = await _positionsRepository.ListAllAsync().ConfigureAwait(true),
+            GameStyles = await _gameStylesRepository.ListAllAsync().ConfigureAwait(true),
+            StatCategories = await _statCategoriesRepository.ListAllAsync().ConfigureAwait(true),
+            StatSkills = await _statSkillTypesRepository.ListAllAsync().ConfigureAwait(true),
+            StatTypes = await _statTypesRepository.ListAllAsync().ConfigureAwait(true),
+            WorkingFoots = await _workingFootsRepository.ListAllAsync().ConfigureAwait(true),
+            Shirts = await _shirtsRepository.ListAllAsync().ConfigureAwait(true)
+        };
+    }
 }

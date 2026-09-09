@@ -8,9 +8,9 @@ using SFC.Data.Application.Interfaces.Data;
 using SFC.Data.Application.Interfaces.Data.Models;
 using SFC.Data.Infrastructure.Extensions;
 using SFC.Data.Infrastructure.Settings.RabbitMq;
-using SFC.Scheme.Messages.Commands.Data;
+using SFC.Game.Messages.Commands.Data;
 
-namespace SFC.Data.Infrastructure.Consumers.Scheme;
+namespace SFC.Data.Infrastructure.Consumers.Game;
 
 public class RequireDataConsumer(IMapper mapper, IDataService dataService)
     : IConsumer<RequireData>
@@ -20,9 +20,9 @@ public class RequireDataConsumer(IMapper mapper, IDataService dataService)
 
     public async Task Consume(ConsumeContext<RequireData> context)
     {
-        GetSchemeDataModel model = await _dataService.GetSchemeDataAsync().ConfigureAwait(true);
+        GetGameDataModel model = await _dataService.GetGameDataAsync().ConfigureAwait(true);
 
-        InitializeData command = _mapper.BuildSchemeInitializeDataCommand(model);
+        InitializeData command = _mapper.BuildGameInitializeDataCommand(model);
 
         await context.Send(command).ConfigureAwait(true);
     }
@@ -32,12 +32,12 @@ public class RequireDataConsumerDefinition : ConsumerDefinition<RequireDataConsu
 {
     private readonly RabbitMqSettings _settings;
 
-    private Message Exchange { get { return _settings.Exchanges.Scheme.Value.Data.RequireInitialize; } }
+    private Message Exchange { get { return _settings.Exchanges.Game.Value.Data.RequireInitialize; } }
 
     public RequireDataConsumerDefinition(IConfiguration configuration)
     {
         _settings = configuration.GetRabbitMqSettings();
-        EndpointName = "sfc.data.scheme.initialize.require.queue";
+        EndpointName = "sfc.data.game.initialize.require.queue";
     }
 
     protected override void ConfigureConsumer(IReceiveEndpointConfigurator endpointConfigurator,
@@ -51,7 +51,7 @@ public class RequireDataConsumerDefinition : ConsumerDefinition<RequireDataConsu
             rmq.AutoDelete = true;
             rmq.DiscardFaultedMessages();
 
-            // "sfc.scheme.data.require"
+            // "sfc.game.data.require"
             rmq.Bind(Exchange.Name, x => x.AutoDelete = true);
         }
     }

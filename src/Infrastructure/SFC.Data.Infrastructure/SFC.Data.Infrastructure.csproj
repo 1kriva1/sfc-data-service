@@ -14,6 +14,7 @@
       <PackageReference Include="SFC.Team.Messages" Version="0.0.20" />
       <PackageReference Include="SFC.Request.Messages" Version="0.0.3" />
       <PackageReference Include="SFC.Scheme.Messages" Version="0.0.2" />
+      <PackageReference Include="SFC.Game.Messages" Version="0.0.1" />
     </ItemGroup>
 
     <ItemGroup>
