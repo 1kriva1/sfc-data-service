@@ -1,15 +1,15 @@
 ﻿using SFC.Data.Application.Common.Constants;
-using SFC.Data.Domain.Common.Interfaces;
+using SFC.Data.Application.Features.Data.Queries.GetAll.Dto;
 
 namespace SFC.Data.Application.Common.Extensions;
 public static class LocalizationExtensions
 {
-    public static void Localize(this IEnumEntity value) => value.Title = Localization.GetDataValue(value.Title);
+    public static void Localize(this DataValueDto value) => value.Title = Localization.GetDataValue(value.Title);
 
     public static IEnumerable<T> Localize<T>(this IEnumerable<T> values)
-        where T : IEnumEntity
+        where T : DataValueDto
     {
-        foreach (IEnumEntity value in values)
+        foreach (DataValueDto value in values)
         {
             value.Localize();
         }

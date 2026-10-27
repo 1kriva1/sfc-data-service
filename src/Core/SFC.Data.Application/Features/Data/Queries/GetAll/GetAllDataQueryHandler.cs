@@ -21,13 +21,13 @@ public class GetAllDataQueryHandler(IMapper mapper, IDataService dataService)
 
         return new GetAllDataViewModel
         {
-            FootballPositions = _mapper.Map<IEnumerable<DataValueDto>>(model.FootballPositions.Localize()),
-            GameStyles = _mapper.Map<IEnumerable<DataValueDto>>(model.GameStyles.Localize()),
-            StatCategories = _mapper.Map<IEnumerable<DataValueDto>>(model.StatCategories.Localize()),
-            StatSkills = _mapper.Map<IEnumerable<DataValueDto>>(model.StatSkills.Localize()),
-            StatTypes = _mapper.Map<IEnumerable<StatTypeDataValueDto>>(model.StatTypes.Localize()),
-            WorkingFoots = _mapper.Map<IEnumerable<DataValueDto>>(model.WorkingFoots.Localize()),
-            Shirts = _mapper.Map<IEnumerable<DataValueDto>>(model.Shirts.Localize())
+            FootballPositions = _mapper.Map<IEnumerable<DataValueDto>>(model.FootballPositions).Localize(),
+            GameStyles = _mapper.Map<IEnumerable<DataValueDto>>(model.GameStyles).Localize(),
+            StatCategories = _mapper.Map<IEnumerable<DataValueDto>>(model.StatCategories).Localize(),
+            StatSkills = _mapper.Map<IEnumerable<DataValueDto>>(model.StatSkills).Localize(),
+            StatTypes = _mapper.Map<IEnumerable<StatTypeDataValueDto>>(model.StatTypes).Localize(),
+            WorkingFoots = _mapper.Map<IEnumerable<DataValueDto>>(model.WorkingFoots).Localize(),
+            Shirts = _mapper.Map<IEnumerable<DataValueDto>>(model.Shirts).Localize()
         };
     }
 }
