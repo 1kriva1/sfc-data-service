@@ -48,6 +48,11 @@
             Unique identificator of data type.
             </summary>
         </member>
+        <member name="P:SFC.Data.Api.Infrastructure.Models.Data.Common.DataValueModel.Name">
+            <summary>
+            Name of data type.
+            </summary>
+        </member>
         <member name="P:SFC.Data.Api.Infrastructure.Models.Data.Common.DataValueModel.Title">
             <summary>
             Describe data type.

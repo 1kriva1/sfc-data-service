@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>SFC.Data.Contracts</PackageId>
-    <Version>0.0.5</Version>
+    <Version>0.0.6</Version>
     <Authors>Andrii Kryvoruk</Authors>
     <Company>SFC</Company>
     <Product>SFC</Product>
